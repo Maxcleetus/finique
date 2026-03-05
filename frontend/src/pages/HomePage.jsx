@@ -67,6 +67,50 @@ const buildFallbackReels = () =>
     category: 'Residential'
   }));
 
+const ReelVideoMedia = ({ item }) => {
+  const containerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (!containerRef.current) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.45, rootMargin: '120px 0px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="h-full w-full">
+      {isVisible ? (
+        <SmartVideo
+          src={item.url}
+          fallbackSrc={item.fallbackUrls}
+          autoPlayInView
+          muted
+          loop
+          playsInline
+          controls
+          preload="metadata"
+          poster={item.poster}
+          fallbackImage={item.poster}
+          className="h-full w-full"
+          videoClassName="h-full w-full object-cover"
+        />
+      ) : item.poster ? (
+        <img src={item.poster} alt={item.title} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+      ) : (
+        <div className="h-full w-full bg-slate-900" />
+      )}
+    </div>
+  );
+};
+
 const HomePage = () => {
   const [featured, setFeatured] = useState([]);
   const [featuredLoading, setFeaturedLoading] = useState(true);
@@ -372,21 +416,8 @@ const HomePage = () => {
                       className="group w-[220px] overflow-hidden rounded-2xl border border-brand-border bg-white shadow-panel"
                     >
                       <div className="relative h-[360px] overflow-hidden bg-black">
-                        <SmartVideo
-                          src={item.url}
-                          fallbackSrc={item.fallbackUrls}
-                          autoPlayInView
-                          muted
-                          loop
-                          playsInline
-                          controls
-                          preload="none"
-                          poster={item.poster}
-                          fallbackImage={item.poster}
-                          className="h-full w-full"
-                          videoClassName="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                        <ReelVideoMedia item={item} />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                         <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
                           Video
                         </span>
@@ -408,21 +439,8 @@ const HomePage = () => {
                       className="group overflow-hidden rounded-2xl border border-brand-border bg-white shadow-panel"
                     >
                       <div className="relative h-[360px] overflow-hidden bg-black">
-                        <SmartVideo
-                          src={item.url}
-                          fallbackSrc={item.fallbackUrls}
-                          autoPlayInView
-                          muted
-                          loop
-                          playsInline
-                          controls
-                          preload="none"
-                          poster={item.poster}
-                          fallbackImage={item.poster}
-                          className="h-full w-full"
-                          videoClassName="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                        <ReelVideoMedia item={item} />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                         <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
                           Video
                         </span>

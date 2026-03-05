@@ -9,11 +9,31 @@ const PublicLayout = ({ children }) => {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsEnquiryOpen(true);
-    }, 10000);
+    let timer = null;
 
-    return () => clearTimeout(timer);
+    const scheduleAutoPopup = (remainingMs = 10000) => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        setIsEnquiryOpen(true);
+      }, Math.max(0, remainingMs));
+    };
+
+    const preloaderDoneAt = window.__finiquePreloaderCompleteAt;
+    if (typeof preloaderDoneAt === 'number') {
+      const elapsedMs = Date.now() - preloaderDoneAt;
+      scheduleAutoPopup(10000 - elapsedMs);
+    } else {
+      const handlePreloaderComplete = () => scheduleAutoPopup(10000);
+      window.addEventListener('finique:preloader-complete', handlePreloaderComplete, { once: true });
+      return () => {
+        if (timer) clearTimeout(timer);
+        window.removeEventListener('finique:preloader-complete', handlePreloaderComplete);
+      };
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   return (

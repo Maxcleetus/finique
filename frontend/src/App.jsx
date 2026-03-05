@@ -9,16 +9,39 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const MIN_PRELOADER_MS = 900;
 
 const App = () => {
   const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowPreloader(false);
-    }, 4000);
+    const preloaderStart = Date.now();
+    let hasCompleted = false;
+    let hideTimer = null;
 
-    return () => clearTimeout(timer);
+    const completePreloader = () => {
+      if (hasCompleted) return;
+      hasCompleted = true;
+
+      const elapsed = Date.now() - preloaderStart;
+      const remaining = Math.max(0, MIN_PRELOADER_MS - elapsed);
+      hideTimer = setTimeout(() => {
+        setShowPreloader(false);
+        window.__finiquePreloaderCompleteAt = Date.now();
+        window.dispatchEvent(new CustomEvent('finique:preloader-complete'));
+      }, remaining);
+    };
+
+    if (document.readyState === 'complete') {
+      completePreloader();
+    } else {
+      window.addEventListener('load', completePreloader, { once: true });
+    }
+
+    return () => {
+      if (hideTimer) clearTimeout(hideTimer);
+      window.removeEventListener('load', completePreloader);
+    };
   }, []);
 
   return (

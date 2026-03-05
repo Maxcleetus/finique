@@ -1,0 +1,13 @@
+node_modules
+.env
+.DS_Store
+dist
+coverage
+*.log
+
+# Local heavy media should not be committed
+frontend/src/assets/*
+!frontend/src/assets/.gitkeep
+admin-panel/src/assets/*
+!admin-panel/src/assets/.gitkeep
+Brand kit finique/

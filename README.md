@@ -2,6 +2,10 @@
 
 Production-ready corporate product showcase and lead generation platform for **FINIQUE** (premium uPVC windows and doors), with a standalone admin app.
 
+## Live Website
+
+- Main URL: `https://finique-se1r.vercel.app/`
+
 ## Tech Stack
 
 - Frontend: React (Vite), React Router DOM, Tailwind CSS, Axios, Framer Motion, React Helmet Async

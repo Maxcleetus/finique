@@ -5,7 +5,8 @@ const links = [
   { to: '/admin', label: 'Dashboard' },
   { to: '/admin/products', label: 'Products' },
   { to: '/admin/projects', label: 'Projects' },
-  { to: '/admin/enquiries', label: 'Enquiries' }
+  { to: '/admin/enquiries', label: 'Enquiries' },
+  { to: '/admin/reviews', label: 'Reviews' }
 ];
 
 const AdminLayout = () => {

@@ -70,11 +70,7 @@ const ProductDetailPage = () => {
               ))}
             </motion.div>
           )}
-          {product.videoUrl && (
-            <motion.video controls preload="metadata" className="h-80 w-full rounded-xl bg-black object-cover" variants={slideUp}>
-              <source src={product.videoUrl} />
-            </motion.video>
-          )}
+
           <motion.article className="card" variants={slideUp}>
             <h1 className="text-2xl font-bold text-brand-navy">{product.title}</h1>
             <p className="mt-3 text-sm text-slate-600">{product.description}</p>

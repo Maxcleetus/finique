@@ -10,16 +10,10 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 
-const AdminLayout = lazy(() => import('./admin/AdminLayout'));
-const AdminLoginPage = lazy(() => import('./admin/AdminLoginPage'));
-const AdminDashboardPage = lazy(() => import('./admin/AdminDashboardPage'));
-const AdminProductsPage = lazy(() => import('./admin/AdminProductsPage'));
-const AdminProjectsPage = lazy(() => import('./admin/AdminProjectsPage'));
-const AdminEnquiriesPage = lazy(() => import('./admin/AdminEnquiriesPage'));
-const AdminReviewsPage = lazy(() => import('./admin/AdminReviewsPage'));
+
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
-const MIN_PRELOADER_MS = 4000;
+const MIN_PRELOADER_MS = 2000;
 
 const App = () => {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -105,17 +99,6 @@ const App = () => {
               </PublicLayout>
             }
           />
-
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route element={<ProtectedRoute />}>
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<AdminDashboardPage />} />
-              <Route path="products" element={<AdminProductsPage />} />
-              <Route path="projects" element={<AdminProjectsPage />} />
-              <Route path="enquiries" element={<AdminEnquiriesPage />} />
-              <Route path="reviews" element={<AdminReviewsPage />} />
-            </Route>
-          </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

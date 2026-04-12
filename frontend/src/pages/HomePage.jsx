@@ -115,21 +115,28 @@ const GallerySlider = () => {
   const [activeMediaIndex, setActiveMediaIndex] = useState(null);
 
   const MarqueeRow = ({ items, direction = -1 }) => {
+    const minItemsNeededForHalf = 10; 
+    const halfMultiplier = Math.max(1, Math.ceil(minItemsNeededForHalf / items.length));
+    const safeHalf = Array(halfMultiplier).fill(items).flat();
+    const renderItems = [...safeHalf, ...safeHalf]; 
+    
+    // FIX: Significantly increased multiplier from 8 to 18 to make the scrolling much slower and smoother
+    const scrollDuration = safeHalf.length * 18; 
+
     return (
       <div className="flex overflow-hidden group py-2">
         <motion.div
           className="flex gap-4 min-w-max pr-4"
           animate={{ x: direction === -1 ? ["0%", "-50%"] : ["-50%", "0%"] }}
-          transition={{ ease: "linear", duration: 40, repeat: Infinity }}
+          transition={{ ease: "linear", duration: scrollDuration, repeat: Infinity }}
         >
-          {/* Duplicate the items to create a seamless infinite scroll effect */}
-          {[...items, ...items].map((item, i) => (
+          {renderItems.map((item, i) => (
             <div 
-              key={i} 
+              key={`${item.originalIndex}-${i}`} 
               onClick={() => setActiveMediaIndex(item.originalIndex)}
               className="cursor-pointer w-[260px] sm:w-[350px] lg:w-[450px] h-[180px] sm:h-[250px] lg:h-[320px] shrink-0 rounded-2xl overflow-hidden shadow-lg border border-slate-200/50 relative group/img"
             >
-              <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" loading="lazy" />
+              <img src={item.src} alt={`Project Gallery ${i}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-brand-navy/0 transition-colors duration-300 group-hover/img:bg-brand-navy/20 flex items-center justify-center">
                 <svg className="w-8 h-8 text-white opacity-0 transition-opacity duration-300 group-hover/img:opacity-100 drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -176,11 +183,6 @@ const HomePage = () => {
   const [reviewsLoading, setReviewsLoading] = useState(true);
 
   const featuredSliderRef = useRef(null);
-  
-  const [isDesktop, setIsDesktop] = useState(() => {
-    if (typeof window === 'undefined') return true;
-    return window.matchMedia('(min-width: 768px)').matches;
-  });
 
   useEffect(() => {
     const fetchFeatured = async () => {
@@ -198,7 +200,7 @@ const HomePage = () => {
       setReviewsLoading(true);
       try {
         const { data } = await api.get('/reviews');
-        setReviews(data.slice(0, 6)); // Display latest 6 reviews
+        setReviews(data.slice(0, 6)); 
       } catch {
         setReviews([]);
       } finally {
@@ -208,18 +210,6 @@ const HomePage = () => {
     
     fetchFeatured();
     fetchReviews();
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
-    const syncViewport = (event) => {
-      setIsDesktop(event.matches);
-    };
-
-    setIsDesktop(mediaQuery.matches);
-    mediaQuery.addEventListener('change', syncViewport);
-    return () => mediaQuery.removeEventListener('change', syncViewport);
   }, []);
 
   const scrollFeatured = (direction = 'right') => {
@@ -247,12 +237,13 @@ const HomePage = () => {
     if (featuredLoading || featured.length <= 1) return undefined;
     const interval = setInterval(() => {
       scrollFeatured('right');
-    }, 4500);
+    }, 6000); // FIX: Slowed down from 4500ms to 6000ms
     return () => clearInterval(interval);
   }, [featuredLoading, featured.length]);
 
   return (
-    <>
+    /* FIX: Added overflow-x-hidden wrapper to entirely prevent the right-side horizontal scrolling space issue */
+    <main className="relative w-full overflow-x-hidden">
       <Seo title="Home" description="Modern Aluminium Door & Window Systems" />
 
       {/* 1. Hero Section */}
@@ -262,7 +253,7 @@ const HomePage = () => {
           className="absolute inset-0 z-0 origin-center"
           initial={{ scale: 1 }}
           animate={{ scale: 1.05 }}
-          transition={{ duration: 25, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+          transition={{ duration: 40, ease: "linear", repeat: Infinity, repeatType: "reverse" }} // FIX: Slowed down background zoom (duration 25 -> 40)
         >
           <img 
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600" 
@@ -302,7 +293,7 @@ const HomePage = () => {
               </motion.div>
               
               {/* Main Headline */}
-              <motion.h1 variants={slideUp} className="mt-6 text-5xl font-extrabold leading-[1.08] text-white drop-shadow-2xl sm:text-6xl lg:text-7xl">
+              <motion.h1 variants={slideUp} className="mt-6 text-4xl sm:text-5xl font-extrabold leading-[1.08] text-white drop-shadow-2xl lg:text-7xl">
                 Modern Doors &
                 <span className="block mt-1 sm:mt-2 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 via-violet-100 to-white">
                   Window Systems.
@@ -315,14 +306,14 @@ const HomePage = () => {
               </motion.p>
               
               {/* CTA Buttons */}
-              <motion.div variants={slideUp} className="mt-8 flex flex-wrap gap-4 items-center">
-                 <Link to="/contact" className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+              <motion.div variants={slideUp} className="mt-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+                 <Link to="/contact" className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
                    Contact Us
                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                    </svg>
                  </Link>
-                 <Link to="/contact" className="group inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white">
+                 <Link to="/contact" className="w-full sm:w-auto group inline-flex justify-center items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white">
                    <svg className="w-4 h-4 text-violet-300 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -443,10 +434,10 @@ const HomePage = () => {
               <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
               <div
                 ref={featuredSliderRef}
-                className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-8 scroll-smooth no-scrollbar"
+                className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-8 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               >
                 {featured.map((product) => (
-                  <div key={product._id} className="w-[85%] shrink-0 snap-start sm:w-[350px]">
+                  <div key={product._id} className="w-[85vw] max-w-[300px] sm:max-w-none sm:w-[350px] shrink-0 snap-start">
                     <ProductCard product={product} />
                   </div>
                 ))}
@@ -508,7 +499,6 @@ const HomePage = () => {
 
       {/* 6. Review Section */}
       <section className="bg-slate-50 py-20 lg:py-32 overflow-hidden relative border-y border-slate-200">
-        {/* Professional Elegant Shade */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(237,233,254,0.6)_0%,transparent_80%)] pointer-events-none" />
 
         <div className="container-shell relative z-10">
@@ -529,25 +519,17 @@ const HomePage = () => {
           <p className="text-center text-slate-500 relative z-10">No reviews yet. Be the first to share your experience!</p>
         ) : (
           <div className="relative w-full flex overflow-hidden py-6">
-             {/* Gradient Fade Edges for Marquee Seamless Integration */}
              <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none" />
              <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-l from-slate-50 to-transparent z-20 pointer-events-none" />
 
              {(() => {
-               // A single review card is roughly 400px wide. 
-               // To safely overflow ultra-wide monitors (e.g., 2560px) without creating a massively unsafe DOM width 
-               // (>30,000px causes browsers/GPUs to cull the element into blank space), we calculate duplicates precisely.
-               const minItemsNeeded = 12; // Yields ~5000px total minimum width
-               const multiplier = Math.max(2, Math.ceil(minItemsNeeded / reviews.length));
+               const minItemsNeededForHalf = 10; 
+               const halfMultiplier = Math.max(1, Math.ceil(minItemsNeededForHalf / reviews.length));
+               const safeHalf = Array(halfMultiplier).fill(reviews).flat();
+               const safeReviews = [...safeHalf, ...safeHalf]; 
                
-               // The multiplier MUST be an even number because our animation shifts by -50%. 
-               // An even multiplier ensures the halfway point neatly splits whole arrays.
-               const evenMultiplier = multiplier % 2 === 0 ? multiplier : multiplier + 1;
-               
-               const safeReviews = Array(evenMultiplier).fill(reviews).flat();
-               
-               // Keep the scrolling speed constant regardless of total reviews
-               const scrollDuration = safeReviews.length * 4; 
+               // FIX: Significantly increased multiplier from 8 to 18 to make scrolling much slower
+               const scrollDuration = safeHalf.length * 18; 
 
                return (
                  <motion.div 
@@ -558,9 +540,8 @@ const HomePage = () => {
                    {safeReviews.map((review, idx) => (
                      <div 
                        key={`${review._id}-${idx}`} 
-                       className="w-[300px] sm:w-[420px] relative rounded-3xl border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)]"
+                       className="w-[320px] sm:w-[420px] relative rounded-3xl border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)]"
                      >
-                       {/* Minimal watermark quotation */}
                        <div className="absolute top-4 right-6 text-8xl font-serif text-slate-100/60 leading-none pointer-events-none">"</div>
                        
                        <div className="flex text-yellow-500 mb-6">
@@ -599,7 +580,6 @@ const HomePage = () => {
         viewport={viewport}
         variants={staggerContainer}
       >
-        {/* Subtle Decorative Gradient */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-violet-100/50 rounded-full blur-[80px] pointer-events-none" />
 
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-20 relative z-10 items-start">
@@ -641,7 +621,7 @@ const HomePage = () => {
           </motion.div>
         </div>
       </motion.section>
-    </>
+    </main>
   );
 };
 

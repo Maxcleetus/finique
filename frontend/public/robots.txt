@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.finique.com/sitemap.xml
+Sitemap: https://finiquewindows.com/sitemap.xml

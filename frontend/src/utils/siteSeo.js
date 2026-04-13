@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: 'FINIQUE',
   legalName: 'FINIQUE Manufacturing Pvt. Ltd.',
-  siteUrl: (import.meta.env.VITE_SITE_URL || 'https://www.finique.com').replace(/\/+$/, ''),
+  siteUrl: (import.meta.env.VITE_SITE_URL || 'https://finiquewindows.com').replace(/\/+$/, ''),
   defaultTitle: 'Premium Aluminium Windows & Doors',
   defaultDescription:
     'FINIQUE designs and manufactures premium aluminium windows and doors for residential and commercial projects across India.',

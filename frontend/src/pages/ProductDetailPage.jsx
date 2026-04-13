@@ -6,6 +6,7 @@ import EnquiryForm from '../components/EnquiryForm';
 import Seo from '../components/Seo';
 import api from '../services/api';
 import { slideLeft, slideRight, slideUp, staggerContainer, viewport } from '../utils/motion';
+import { buildCanonicalUrl, siteConfig, toAbsoluteUrl } from '../utils/siteSeo';
 
 const ProductDetailPage = () => {
   const { slug } = useParams();
@@ -38,6 +39,22 @@ const ProductDetailPage = () => {
     return <div className="container-shell py-14 text-sm text-red-700">{error || 'Product not found'}</div>;
   }
 
+  const imageUrl = product.images?.[0] || '/assets/logo.png';
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    description: product.description,
+    image: product.images?.length ? product.images.map((item) => toAbsoluteUrl(item)) : [toAbsoluteUrl(imageUrl)],
+    brand: {
+      '@type': 'Brand',
+      name: siteConfig.name
+    },
+    category: product.category,
+    sku: product.slug,
+    url: buildCanonicalUrl(`/products/${product.slug}`)
+  };
+
   return (
     <motion.section
       className="container-shell py-14"
@@ -46,7 +63,14 @@ const ProductDetailPage = () => {
       viewport={viewport}
       variants={staggerContainer}
     >
-      <Seo title={product.title} description={product.description} />
+      <Seo
+        title={product.title}
+        description={product.description}
+        type="product"
+        image={imageUrl}
+        schema={productSchema}
+        keywords={`${product.title}, ${product.category}, aluminium ${product.category?.toLowerCase() || 'product'}, FINIQUE`}
+      />
       <div className="grid gap-8 lg:grid-cols-3">
         <motion.div className="lg:col-span-2 space-y-6" variants={slideRight}>
           <motion.img

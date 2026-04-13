@@ -2,15 +2,29 @@ import { motion } from 'framer-motion';
 import EnquiryForm from '../components/EnquiryForm';
 import Seo from '../components/Seo';
 import { slideUp, staggerContainer, viewport } from '../utils/motion';
+import { buildCanonicalUrl, siteConfig } from '../utils/siteSeo';
 
 const LOCATION_URL =
   'https://www.google.com/maps/place/Finique+Windows/@10.2978812,76.147169,17z/data=!3m1!4b1!4m6!3m5!1s0x3b081f6faaa697cf:0xdb2288bf3b2975aa!8m2!3d10.2978812!4d76.147169!16s%2Fg%2F11zjxtr94k?entry=ttu&g_ep=EgoyMDI2MDMwMi4wIKXMDSoASAFQAw%3D%3D';
 const LOCATION_EMBED_URL = 'https://maps.google.com/maps?q=10.2978812,76.147169&z=17&output=embed';
 
 const ContactPage = () => {
+  const contactSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: `Contact ${siteConfig.name}`,
+    url: buildCanonicalUrl('/contact'),
+    description: 'Contact FINIQUE for aluminium window and door consultations, pricing, and project enquiries.'
+  };
+
   return (
     <>
-      <Seo title="Contact" description="Contact FINIQUE for product consultations and project enquiries." />
+      <Seo
+        title="Contact"
+        description="Contact FINIQUE for aluminium window and door consultations, pricing, and project enquiries."
+        schema={contactSchema}
+        keywords="contact FINIQUE, aluminium windows enquiry, aluminium doors quote, window manufacturer contact Kerala"
+      />
 
       <motion.section
         className="container-shell py-20 lg:py-32 flex flex-col gap-20"

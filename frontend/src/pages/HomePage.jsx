@@ -7,6 +7,7 @@ import ProductCard from '../components/ProductCard';
 import Seo from '../components/Seo';
 import api from '../services/api';
 import { slideLeft, slideRight, slideUp, staggerContainer, viewport } from '../utils/motion';
+import { buildCanonicalUrl, siteConfig, toAbsoluteUrl } from '../utils/siteSeo';
 
 const faqData = [
   {
@@ -241,10 +242,38 @@ const HomePage = () => {
     return () => clearInterval(interval);
   }, [featuredLoading, featured.length]);
 
+  const homeSchema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: `${siteConfig.name} Home`,
+      url: buildCanonicalUrl('/'),
+      description: siteConfig.defaultDescription
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqData.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer
+        }
+      }))
+    }
+  ];
+
   return (
     /* FIX: Added overflow-x-hidden wrapper to entirely prevent the right-side horizontal scrolling space issue */
     <main className="relative w-full overflow-x-hidden">
-      <Seo title="Home" description="Modern Aluminium Door & Window Systems" />
+      <Seo
+        title="Premium Aluminium Windows & Doors"
+        description="FINIQUE manufactures premium aluminium windows and doors with modern designs, expert fabrication, and dependable installation support."
+        image={toAbsoluteUrl('/assets/logo.png')}
+        schema={homeSchema}
+        keywords="aluminium windows, aluminium doors, premium windows, sliding windows, casement windows, door manufacturers Kerala, FINIQUE"
+      />
 
       {/* 1. Hero Section */}
       <section className="relative h-[85vh] min-h-[600px] overflow-hidden bg-brand-navy">

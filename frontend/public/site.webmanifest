@@ -1,0 +1,16 @@
+{
+  "name": "FINIQUE",
+  "short_name": "FINIQUE",
+  "description": "Premium aluminium windows and doors for residential and commercial projects.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#101f36",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "660x661",
+      "type": "image/png"
+    }
+  ]
+}

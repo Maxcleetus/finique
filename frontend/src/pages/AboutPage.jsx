@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Seo from '../components/Seo';
 import { slideLeft, slideRight, slideUp, staggerContainer, viewport } from '../utils/motion';
+import { buildCanonicalUrl, siteConfig } from '../utils/siteSeo';
 
 const stats = [
   { value: '10+', label: 'Years of Excellence' },
@@ -50,9 +51,23 @@ const processSteps = [
 ];
 
 const AboutPage = () => {
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: `About ${siteConfig.name}`,
+    url: buildCanonicalUrl('/about'),
+    description:
+      'Learn about FINIQUE, our manufacturing process, quality standards, and premium aluminium window and door systems.'
+  };
+
   return (
     <>
-      <Seo title="About" description="About FINIQUE - premium aluminium windows and doors manufacturer." />
+      <Seo
+        title="About"
+        description="Learn about FINIQUE, our manufacturing process, and the premium aluminium window and door systems we deliver for modern projects."
+        schema={aboutSchema}
+        keywords="about FINIQUE, aluminium windows manufacturer, aluminium doors company, Kerala window manufacturer"
+      />
 
       {/* ── Hero Section ── */}
       <motion.section

@@ -5,6 +5,7 @@ import AppLoader from '../components/AppLoader';
 import Seo from '../components/Seo';
 import api from '../services/api';
 import { slideLeft, slideRight, slideUp, staggerContainer, viewport } from '../utils/motion';
+import { buildCanonicalUrl, siteConfig } from '../utils/siteSeo';
 
 const ProductShowcaseRow = ({ product, index }) => {
   const isEven = index % 2 === 0;
@@ -90,10 +91,22 @@ const ProductsPage = () => {
 
   const categories = useMemo(() => ['All', ...new Set(products.map((item) => item.category))], [products]);
   const filteredProducts = activeCategory === 'All' ? products : products.filter((item) => item.category === activeCategory);
+  const productsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${siteConfig.name} Products`,
+    url: buildCanonicalUrl('/products'),
+    description: 'Browse FINIQUE aluminium window and door systems for residential and commercial projects.'
+  };
 
   return (
     <>
-      <Seo title="Products" description="Browse FINIQUE product range for premium aluminium windows and doors." />
+      <Seo
+        title="Products"
+        description="Browse FINIQUE aluminium window and door systems for residential and commercial projects."
+        schema={productsSchema}
+        keywords="aluminium window systems, aluminium door systems, sliding doors, casement windows, product catalogue FINIQUE"
+      />
 
       {/* ── Dark Hero Header ── */}
       <section className="relative bg-brand-navy overflow-hidden pb-20">

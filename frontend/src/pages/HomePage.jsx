@@ -11,52 +11,62 @@ import { buildCanonicalUrl, siteConfig, toAbsoluteUrl } from '../utils/siteSeo';
 
 const faqData = [
   {
-    question: "Are your doors and windows customizable?",
-    answer: "Yes, our doors and windows are highly customizable. We understand that every customer has unique preferences and requirements for their doors and windows, which is why we offer a wide range of customization options."
+    question: "Are uPVC windows good for Kerala's climate?",
+    answer: "Absolutely. uPVC windows are among the best choices for Kerala's demanding climate. Their multi-chambered profiles provide excellent thermal insulation to keep rooms cooler, while their fully sealed systems resist water ingress during the heaviest monsoons. Unlike wood, uPVC does not rot or swell in humidity. Unlike aluminium, it doesn't corrode in coastal salt air. VEKA uPVC is specifically stabilized for UV resistance in tropical conditions, ensuring long-lasting performance without yellowing or brittleness."
   },
   {
-    question: "Do your products come with a warranty?",
-    answer: "Yes, our products are backed by a comprehensive warranty that covers both profiles and hardware."
+    question: "What is the difference between uPVC and aluminium windows?",
+    answer: "The key differences lie in insulation, maintenance, and longevity. uPVC windows have significantly lower thermal conductivity than aluminium, meaning they block heat far more effectively — critical for Kerala homes. uPVC is also maintenance-free (no painting, no rust, no corrosion), while aluminium can pit and corrode, especially near the coast. VEKA uPVC systems last 50+ years with minimal upkeep, making them a far more economical long-term investment for Kerala homeowners."
   },
   {
-    question: "What materials do you utilize in the construction of doors and windows?",
-    answer: "We provide premium UPVC frames, and offer a selection of glass options including tinted, frosted, reflective, and clear glasses to meet your specific design and functionality preferences."
+    question: "How do uPVC windows reduce noise from outside?",
+    answer: "VEKA uPVC systems use precision multi-point locking hardware and double-sealed gaskets that create an airtight seal around the frame. Combined with double-glazed or laminated glass, this can achieve up to 40dB of noise reduction — effectively creating a sanctuary from street noise, traffic, and rain. This is especially valuable for homes near busy roads or urban areas."
   },
   {
-    question: "Do you provide professional installation services on doors and windows?",
-    answer: "Yes, Our team of experienced installers is skilled in the proper installation techniques to ensure a precise fit and optimal performance of our products, providing a hassle-free experience for customers."
+    question: "Do Finique Windows products come with a warranty?",
+    answer: "Yes. Our VEKA uPVC profiles carry a manufacturer's guarantee for long-term performance, backed by Finique's dedicated after-sales support. We cover both the profiles and hardware, and our installation team ensures a precision fit so your windows perform as intended from day one."
   },
   {
-    question: "Can your team offer expert guidance in selecting the most suitable doors and windows for a specific project?",
-    answer: "Our team is highly knowledgeable and experienced in the selection of doors and windows for various projects. They can provide expert guidance based on your specific needs, helping you choose the most suitable options in terms of materials, designs, and features to achieve the desired aesthetics and functionality for your project."
+    question: "Can I get custom sizes and configurations for my home?",
+    answer: "Yes, every Finique window is custom-fabricated to your specific opening dimensions. We offer sliding systems, casement windows, tilt-and-turn configurations, and more — all in any size. Our team does precision laser measurement before fabrication to ensure a perfect, thermal-bridge-free fit for your home."
   }
 ];
 
 const featureData = [
   {
-    title: "Enjoy an unparalleled after sales experience",
-    description: "Our dedicated team is here to assist you with any post-installation needs, ensuring your complete satisfaction with our products and services.",
+    title: "Thermal Lift",
+    description: "Multi-chambered VEKA profiles block heat transfer, keeping your interiors significantly cooler and lowering your AC bills — even during Kerala's peak summer.",
     icon: (
       <svg className="w-8 h-8 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
     )
   },
   {
-    title: "Personalized expert advice",
-    description: "Guiding you towards the perfect window solutions for your dream space.",
+    title: "Acoustic Silence",
+    description: "Precision-sealed gaskets and double-glazed glass deliver up to 40dB noise reduction — transforming your home into a sanctuary away from street noise and monsoon rain.",
     icon: (
       <svg className="w-8 h-8 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
       </svg>
     )
   },
   {
-    title: "Experience a diverse array of products at our center",
-    description: "We understand that every space is unique, and your doors and windows should reflect your personal taste and architectural style.",
+    title: "Zero-Gravity Maintenance",
+    description: "No rot. No rust. No repainting. Ever. VEKA uPVC is termite-proof, corrosion-resistant, and UV-stabilized for Kerala's coastal air and tropical sun.",
     icon: (
       <svg className="w-8 h-8 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    )
+  },
+  {
+    title: "Storm-Shield",
+    description: "Integrated drainage channels and watertight engineering ensure not a single drop enters your living room — even during the harshest Karkidakam rains.",
+    icon: (
+      <svg className="w-8 h-8 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
       </svg>
     )
   }
@@ -268,11 +278,11 @@ const HomePage = () => {
     /* FIX: Added overflow-x-hidden wrapper to entirely prevent the right-side horizontal scrolling space issue */
     <main className="relative w-full overflow-x-hidden">
       <Seo
-        title="Premium Aluminium Windows & Doors"
-        description="FINIQUE manufactures premium aluminium windows and doors with modern designs, expert fabrication, and dependable installation support."
+        title="Best uPVC Windows Kerala | VEKA Certified | Finique Windows"
+        description="Finique Windows brings German-engineered VEKA uPVC systems to Kerala. Beat the monsoon, block the heat, and silence the street. Zero maintenance. 50+ year lifespan."
         image={toAbsoluteUrl('/assets/logo.png')}
         schema={homeSchema}
-        keywords="aluminium windows, aluminium doors, premium windows, sliding windows, casement windows, door manufacturers Kerala, FINIQUE"
+        keywords="uPVC windows Kerala, VEKA uPVC Kerala, soundproof windows Kochi, heat resistant windows Kerala, uPVC vs aluminium windows, best windows for Kerala climate, FINIQUE"
       />
 
       {/* 1. Hero Section */}
@@ -317,27 +327,27 @@ const HomePage = () => {
               <motion.div variants={slideUp}>
                 <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-violet-100 backdrop-blur-md">
                   <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
-                  Premium Finique Windows
+                  VEKA Certified · German Engineering · Kerala
                 </span>
               </motion.div>
               
               {/* Main Headline */}
               <motion.h1 variants={slideUp} className="mt-6 text-4xl sm:text-5xl font-extrabold leading-[1.08] text-white drop-shadow-2xl lg:text-7xl">
-                Modern Doors &
+                Windows That
                 <span className="block mt-1 sm:mt-2 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 via-violet-100 to-white">
-                  Window Systems.
+                  Defy the Elements.
                 </span>
               </motion.h1>
               
               {/* Subheadline */}
               <motion.p variants={slideUp} className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg">
-                Engineered for uncompromising strength. Designed for unparalleled elegance. Transform your spaces with state-of-the-art opening solutions.
+                Experience a home that feels lighter, quieter, and cooler. Finique brings German-engineered VEKA uPVC systems to Kerala — designed to withstand the monsoon and the heat while elevating your architecture.
               </motion.p>
               
               {/* CTA Buttons */}
               <motion.div variants={slideUp} className="mt-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                 <Link to="/contact" className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
-                   Contact Us
+                 <Link to="/products" className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+                   Explore the Finique Standard
                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                    </svg>
@@ -361,20 +371,20 @@ const HomePage = () => {
             >
                <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500 rounded-full mix-blend-screen filter blur-[40px] opacity-40 animate-pulse" />
                <div className="flex flex-col relative z-10">
-                  <span className="text-3xl font-extrabold text-white">10+</span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-violet-200">Years Warranty</span>
+                  <span className="text-3xl font-extrabold text-white">50+</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-violet-200">Year Lifespan</span>
                </div>
                <div className="w-px h-12 bg-white/10 relative z-10" />
                <div className="flex flex-col relative z-10">
-                  <span className="text-3xl font-extrabold text-white">#1</span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-violet-200">Premium Choice</span>
+                  <span className="text-3xl font-extrabold text-white">VEKA</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-violet-200">Certified System</span>
                </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 2. Intro / Crafting Dream Spaces Section */}
+      {/* 2. Intro / Founder Story Section */}
       <motion.section
         className="container-shell py-16 lg:py-24"
         initial="hidden"
@@ -386,23 +396,26 @@ const HomePage = () => {
           <motion.div variants={slideRight} className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
             <img 
               src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200" 
-              alt="Crafting Dream Spaces" 
+              alt="Kerala home with premium uPVC windows" 
               className="w-full h-full object-cover"
               loading="lazy"
             />
             <div className="absolute inset-0 border-[8px] border-white/10 mix-blend-overlay"></div>
           </motion.div>
           <motion.div variants={slideLeft} className="px-4">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 mb-3">Modern Aluminium Systems</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-6">Crafting Dream Spaces.</h3>
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
-              At FINIQUE, our premium multi-brand experience centre for doors and windows, we have installed a wide range of ultra-modern aluminium and uPVC door and window systems. Check out how smooth they are to operate. We shall explain how easy they are to maintain. These customisable doors and windows are very secure. 
+            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 mb-3">The Founder's Perspective</h2>
+            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-6">The Problem with the Standard Window.</h3>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-5">
+              In Kerala, we don't just have weather — we have intensity. Heavy monsoons, salt air, and rising heat. Most windows are built for a showroom display, not for our climate's relentless reality.
+            </p>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-5">
+              Over the years, I saw how poor window choices led to water leakage, unbearable heat buildup, noise, and constant maintenance. <strong className="text-brand-navy">Finique was born to solve the "Heavy Home" problem.</strong>
             </p>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-8">
-              Speak to our in-store experts for more details. Visit our store, change your lifestyle forever!
+              We replace the weight of maintenance, the noise of the street, and the heat of the sun — with precision-engineered VEKA uPVC systems. Not to sell windows. But to help you understand what a good window should actually do.
             </p>
             <Link to="/about" className="inline-flex items-center gap-2 rounded-md bg-brand-navy px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-navy/90">
-              Discover Our Story
+              Our Story
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -495,7 +508,7 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      {/* 5. Features / Elevated Experiences Section */}
+      {/* 5. Features / Antigravity Pillars Section */}
       <motion.section
         className="bg-white py-16 lg:py-24 border-y border-slate-200"
         initial="hidden"
@@ -505,21 +518,99 @@ const HomePage = () => {
       >
         <div className="container-shell">
           <motion.div className="text-center max-w-3xl mx-auto mb-14" variants={slideUp}>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-600 mb-2">Elevated Experiences</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-4">Unparalleled Experience</h3>
-            <p className="text-slate-600">
-              We pride ourselves on offering an unparalleled experience, where the fusion of exceptional craftsmanship, top-tier materials, and customized solutions results in premium doors and windows that transcend the ordinary. Enhancing the beauty and functionality of any space has never been more seamless. Whether you're renovating, building a new home, or upgrading your commercial property, our services are thoughtfully tailored to cater to your distinctive requirements. Step into an elevated realm of aesthetics, security, and energy efficiency.
+            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-4">The Finique Difference</span>
+            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-4">Engineered for Kerala. Built to Last.</h3>
+            <p className="text-slate-600 text-base leading-relaxed">
+              Every VEKA uPVC system we install is measured against Kerala's most demanding conditions — not just a showroom standard. These are not features. These are expectations.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featureData.map((feature, idx) => (
-              <motion.div key={idx} variants={slideUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col items-center">
+              <motion.div key={idx} variants={slideUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col items-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                 <div className="w-16 h-16 bg-brand-slate rounded-full flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
                 <h4 className="text-lg font-bold text-brand-navy mb-3">{feature.title}</h4>
                 <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* 5b. Why Kerala Section */}
+      <motion.section
+        className="bg-brand-navy py-16 lg:py-24 overflow-hidden relative"
+        initial="hidden"
+        whileInView="show"
+        viewport={viewport}
+        variants={staggerContainer}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(139,92,246,0.25)_0%,transparent_70%)] pointer-events-none" />
+        <div className="container-shell relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div variants={slideRight}>
+              <span className="inline-block rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-200 mb-6">Local Authority</span>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6">Built for the Coast.<br />Proven in the Rain.</h3>
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8">
+                From the humid backwaters of Kochi to the relentless monsoons of Wayanad — Kerala's climate is unlike anywhere else. Finique Windows are tested for real-life performance in every corner of the state.
+              </p>
+              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-brand-navy">
+                Get Your Free Window Audit
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </motion.div>
+            <motion.div variants={slideLeft} className="space-y-5">
+              {[
+                { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "Corrosion Resistance", desc: "Essential for homes within 5km of the coastline. VEKA uPVC is completely immune to salt air and coastal humidity that destroys aluminium and steel over time." },
+                { icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z", title: "Wind Load Capacity", desc: "Engineered to withstand high-pressure winds in high-rise apartments and exposed hillside homes — tested to international wind resistance standards." },
+                { icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10", title: "Monsoon Drainage Tracks", desc: "Integrated drainage channels within the frame profile ensure that not a single drop of water enters your living room — even during the harshest Karkidakam rains." }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-5 bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
+                    <svg className="w-6 h-6 text-violet-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white text-base mb-1">{item.title}</h4>
+                    <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* 5c. The Weightless Journey (Process) Section */}
+      <motion.section
+        className="bg-slate-50 py-16 lg:py-24 border-y border-slate-200"
+        initial="hidden"
+        whileInView="show"
+        viewport={viewport}
+        variants={staggerContainer}
+      >
+        <div className="container-shell">
+          <motion.div className="text-center max-w-3xl mx-auto mb-14" variants={slideUp}>
+            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-4">Our Process</span>
+            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-4">The Weightless Journey</h3>
+            <p className="text-slate-600 text-base leading-relaxed">From first conversation to final installation — we handle every detail so you don't have to.</p>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { step: "01", title: "The Dialogue", desc: "We don't sell; we educate. A free consultation to understand your home's orientation, lifestyle needs, and design goals." },
+              { step: "02", title: "Precision Mapping", desc: "Expert measurement using laser technology — because a window is only as good as its fit. Zero guesswork, zero gaps." },
+              { step: "03", title: "Seamless Installation", desc: "Our trained technicians ensure a thermal-bridge-free installation. Clean, efficient, and built to perform from day one." },
+              { step: "04", title: "The Finique Guarantee", desc: "Long-term peace of mind with dedicated after-sales support. We stand behind every window we install, for the long haul." }
+            ].map((item, idx) => (
+              <motion.div key={idx} variants={slideUp} className="relative bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <span className="text-5xl font-black text-violet-100 leading-none block mb-4">{item.step}</span>
+                <h4 className="text-lg font-bold text-brand-navy mb-3">{item.title}</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -618,7 +709,7 @@ const HomePage = () => {
             </span>
             <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy leading-tight mb-6">Frequently Asked Questions</h3>
             <p className="text-slate-600 mb-8 text-base lg:text-lg">
-              Have questions about our premium door and window systems? Find answers to commonly asked questions here.
+              Have questions about uPVC windows for your Kerala home? Find clear, honest answers here — no jargon.
             </p>
             
             <div className="relative overflow-hidden rounded-3xl bg-brand-navy p-8 shadow-2xl group">

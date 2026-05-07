@@ -34,7 +34,7 @@ const Footer = () => {
             {/* Standard logo for white bg */}
             <img src="/assets/logo.png" alt="FINIQUE" className="h-10 w-auto mb-5" loading="lazy" />
             <p className="text-sm text-slate-600 leading-relaxed max-w-xs">
-              Premium aluminium windows and doors engineered for performance, longevity, and modern architecture.
+              German-engineered VEKA uPVC windows and doors, built for Kerala's climate. Zero maintenance. Long-term performance you can feel every day.
             </p>
           </motion.div>
 
@@ -100,7 +100,7 @@ const Footer = () => {
             © {new Date().getFullYear()} FINIQUE. All rights reserved.
           </p>
           <p className="text-xs text-slate-500 font-medium">
-            Premium Aluminium Door & Window Systems
+            German-Engineered VEKA uPVC Systems · Kerala
           </p>
         </div>
       </div>

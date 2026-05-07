@@ -102,10 +102,10 @@ const ProductsPage = () => {
   return (
     <>
       <Seo
-        title="Products"
-        description="Browse FINIQUE aluminium window and door systems for residential and commercial projects."
+        title="VEKA uPVC Windows & Doors Kerala | Finique Windows"
+        description="Browse Finique's VEKA uPVC window and door systems — engineered for Kerala's monsoon, heat, and coastal air. Soundproof, heat-resistant, zero-maintenance."
         schema={productsSchema}
-        keywords="aluminium window systems, aluminium door systems, sliding doors, casement windows, product catalogue FINIQUE"
+        keywords="uPVC window systems Kerala, VEKA uPVC doors, soundproof windows Kochi, heat resistant uPVC windows, sliding uPVC doors, casement uPVC windows, tilt turn windows Kerala"
       />
 
       {/* ── Dark Hero Header ── */}
@@ -125,11 +125,11 @@ const ProductsPage = () => {
               Our Range
             </span>
             <h1 className="text-5xl sm:text-6xl font-extrabold text-white leading-tight mb-5">
-              Product{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-blue-300">Catalogue</span>
+              The VEKA{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-300 to-blue-300">Advantage</span>
             </h1>
             <p className="text-slate-100 text-lg leading-relaxed">
-              Premium aluminium door and window systems — each engineered for performance, elegance, and architectural precision.
+              The Science of Silence &amp; Strength. We don't use ordinary plastic — we fabricate with <strong>VEKA uPVC</strong>, a multi-chambered, lead-free, German-engineered profile built for precision, thermal efficiency, and a lifetime of zero maintenance in Kerala's demanding climate.
             </p>
           </motion.div>
         </motion.div>

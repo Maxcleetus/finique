@@ -2,9 +2,9 @@ export const siteConfig = {
   name: 'FINIQUE',
   legalName: 'FINIQUE Manufacturing Pvt. Ltd.',
   siteUrl: (import.meta.env.VITE_SITE_URL || 'https://finiquewindows.com').replace(/\/+$/, ''),
-  defaultTitle: 'Premium Aluminium Windows & Doors',
+  defaultTitle: 'Premium uPVC Windows & Doors Kerala | VEKA Certified | Finique',
   defaultDescription:
-    'FINIQUE designs and manufactures premium aluminium windows and doors for residential and commercial projects across India.',
+    'Finique Windows brings German-engineered VEKA uPVC systems to Kerala — built for monsoons, heat, and coastal air. Zero maintenance. 50+ year lifespan.',
   defaultImage: '/assets/logo.png',
   phone: '+91 98765 43210',
   email: 'hello@finique.com',

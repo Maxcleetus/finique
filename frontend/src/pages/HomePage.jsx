@@ -311,20 +311,20 @@ const HomePage = () => {
         />
         
         {/* Cinematic Vignette & Gradients (Deep Shade) */}
-        <div className="absolute inset-0 z-[5] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.7)_100%)] sm:bg-[radial-gradient(ellipse_at_center,transparent_10%,rgba(0,0,0,0.6)_100%)] mix-blend-multiply" />
-        <div className="absolute inset-0 z-10 bg-gradient-to-t sm:bg-gradient-to-r from-brand-navy/95 sm:from-brand-navy via-brand-navy/85 sm:via-brand-navy/85 to-brand-navy/50 sm:to-black/20" />
+        <div className="absolute inset-0 z-[5] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.65)_100%)] mix-blend-multiply" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-b sm:bg-gradient-to-r from-brand-navy/90 via-brand-navy/80 to-brand-navy/50 sm:to-black/20" />
         
         {/* Foreground Content */}
-        <div className="absolute inset-0 z-40 flex items-center">
+        <div className="absolute inset-0 z-40 flex items-center justify-center lg:justify-start">
           <div className="container-shell w-full relative">
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               animate="show"
-              className="max-w-4xl px-4 sm:px-8 py-10"
+              className="max-w-2xl lg:max-w-4xl mx-auto lg:mx-0 px-6 sm:px-8 py-10 text-center lg:text-left"
             >
               {/* Pill Tag */}
-              <motion.div variants={slideUp}>
+              <motion.div variants={slideUp} className="flex justify-center lg:justify-start">
                 <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-violet-100 backdrop-blur-md">
                   <span className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
                   VEKA Certified · German Engineering · Kerala
@@ -332,7 +332,7 @@ const HomePage = () => {
               </motion.div>
               
               {/* Main Headline */}
-              <motion.h1 variants={slideUp} className="mt-6 text-4xl sm:text-5xl font-extrabold leading-[1.08] text-white drop-shadow-2xl lg:text-7xl">
+              <motion.h1 variants={slideUp} className="mt-5 text-4xl sm:text-5xl font-extrabold leading-[1.08] text-white drop-shadow-2xl lg:text-7xl">
                 Windows That
                 <span className="block mt-1 sm:mt-2 text-transparent bg-clip-text bg-gradient-to-r from-violet-300 via-violet-100 to-white">
                   Defy the Elements.
@@ -340,19 +340,19 @@ const HomePage = () => {
               </motion.h1>
               
               {/* Subheadline */}
-              <motion.p variants={slideUp} className="mt-6 max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg">
-                Experience a home that feels lighter, quieter, and cooler. Finique brings German-engineered VEKA uPVC systems to Kerala — designed to withstand the monsoon and the heat while elevating your architecture.
+              <motion.p variants={slideUp} className="mt-5 text-sm sm:text-base lg:text-lg leading-relaxed text-slate-300">
+                Experience a home that feels lighter, quieter, and cooler. Finique brings German-engineered VEKA uPVC systems to Kerala — designed to withstand the monsoon and the heat.
               </motion.p>
               
               {/* CTA Buttons */}
-              <motion.div variants={slideUp} className="mt-8 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-                 <Link to="/products" className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-8 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+              <motion.div variants={slideUp} className="mt-7 flex flex-col sm:flex-row gap-3 items-center justify-center lg:justify-start">
+                 <Link to="/products" className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-7 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
                    Explore the Finique Standard
                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                    </svg>
                  </Link>
-                 <Link to="/contact" className="w-full sm:w-auto group inline-flex justify-center items-center gap-2 rounded-full border border-white/30 bg-black/20 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/10 hover:border-white">
+                 <Link to="/contact" className="w-full sm:w-auto group inline-flex justify-center items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white">
                    <svg className="w-4 h-4 text-violet-300 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -386,13 +386,13 @@ const HomePage = () => {
 
       {/* 2. Intro / Founder Story Section */}
       <motion.section
-        className="container-shell py-16 lg:py-24"
+        className="container-shell py-12 lg:py-24"
         initial="hidden"
         whileInView="show"
         viewport={viewport}
         variants={staggerContainer}
       >
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <motion.div variants={slideRight} className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl">
             <img 
               src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200" 
@@ -402,14 +402,17 @@ const HomePage = () => {
             />
             <div className="absolute inset-0 border-[8px] border-white/10 mix-blend-overlay"></div>
           </motion.div>
-          <motion.div variants={slideLeft} className="px-4">
+          <motion.div variants={slideLeft} className="px-0 sm:px-4">
             <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500 mb-3">The Founder's Perspective</h2>
-            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-6">The Problem with the Standard Window.</h3>
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-5">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-navy leading-tight mb-5">The Problem with the Standard Window.</h3>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-4">
               In Kerala, we don't just have weather — we have intensity. Heavy monsoons, salt air, and rising heat. Most windows are built for a showroom display, not for our climate's relentless reality.
             </p>
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-5">
-              Over the years, I saw how poor window choices led to water leakage, unbearable heat buildup, noise, and constant maintenance. <strong className="text-brand-navy">Finique was born to solve the "Heavy Home" problem.</strong>
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-4">
+              Over the years, I saw how poor window choices led to water leakage, unbearable heat buildup, noise, and constant maintenance.
+            </p>
+            <p className="text-center text-lg sm:text-xl font-bold text-brand-navy my-5 px-2 py-3 bg-violet-50 rounded-xl border border-violet-100">
+              Finique was born to solve the "Heavy Home" problem.
             </p>
             <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-8">
               We replace the weight of maintenance, the noise of the street, and the heat of the sun — with precision-engineered VEKA uPVC systems. Not to sell windows. But to help you understand what a good window should actually do.
@@ -437,11 +440,11 @@ const HomePage = () => {
             <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-4">
               Explore Collection
             </span>
-            <motion.h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy leading-tight" variants={slideUp}>
+            <motion.h2 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-brand-navy leading-tight" variants={slideUp}>
               Our Product Range
             </motion.h2>
-            <motion.p className="mt-4 text-base leading-relaxed text-slate-600" variants={slideUp}>
-              Discover our premium aluminium door and window systems engineered for performance, elegance, and modern architectural design.
+            <motion.p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600" variants={slideUp}>
+              Discover our premium VEKA uPVC window and door systems — heat-resistant, soundproof, and zero-maintenance. Built for Kerala.
             </motion.p>
           </div>
           <div className="hidden items-center gap-3 md:flex">
@@ -510,29 +513,29 @@ const HomePage = () => {
 
       {/* 5. Features / Antigravity Pillars Section */}
       <motion.section
-        className="bg-white py-16 lg:py-24 border-y border-slate-200"
+        className="bg-white py-12 lg:py-24 border-y border-slate-200"
         initial="hidden"
         whileInView="show"
         viewport={viewport}
         variants={staggerContainer}
       >
         <div className="container-shell">
-          <motion.div className="text-center max-w-3xl mx-auto mb-14" variants={slideUp}>
-            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-4">The Finique Difference</span>
-            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-4">Engineered for Kerala. Built to Last.</h3>
-            <p className="text-slate-600 text-base leading-relaxed">
-              Every VEKA uPVC system we install is measured against Kerala's most demanding conditions — not just a showroom standard. These are not features. These are expectations.
+          <motion.div className="text-center max-w-2xl mx-auto mb-10 lg:mb-14 px-4" variants={slideUp}>
+            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-3">The Finique Difference</span>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-navy leading-tight mb-3">Engineered for Kerala.<br className="hidden sm:block" /> Built to Last.</h3>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Every VEKA uPVC system we install is measured against Kerala's most demanding conditions. These are not features. These are expectations.
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {featureData.map((feature, idx) => (
-              <motion.div key={idx} variants={slideUp} className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col items-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <div className="w-16 h-16 bg-brand-slate rounded-full flex items-center justify-center mb-6">
+              <motion.div key={idx} variants={slideUp} className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col items-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-brand-slate rounded-full flex items-center justify-center mb-4 sm:mb-6">
                   {feature.icon}
                 </div>
-                <h4 className="text-lg font-bold text-brand-navy mb-3">{feature.title}</h4>
-                <p className="text-slate-600 text-sm leading-relaxed">{feature.description}</p>
+                <h4 className="text-base sm:text-lg font-bold text-brand-navy mb-2">{feature.title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -541,7 +544,7 @@ const HomePage = () => {
 
       {/* 5b. Why Kerala Section */}
       <motion.section
-        className="bg-brand-navy py-16 lg:py-24 overflow-hidden relative"
+        className="bg-brand-navy py-12 lg:py-24 overflow-hidden relative"
         initial="hidden"
         whileInView="show"
         viewport={viewport}
@@ -549,19 +552,21 @@ const HomePage = () => {
       >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(139,92,246,0.25)_0%,transparent_70%)] pointer-events-none" />
         <div className="container-shell relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div variants={slideRight}>
-              <span className="inline-block rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-200 mb-6">Local Authority</span>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-6">Built for the Coast.<br />Proven in the Rain.</h3>
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <motion.div variants={slideRight} className="text-center lg:text-left">
+              <span className="inline-block rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-200 mb-5">Local Authority</span>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-5">Built for the Coast.<br />Proven in the Rain.</h3>
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
                 From the humid backwaters of Kochi to the relentless monsoons of Wayanad — Kerala's climate is unlike anywhere else. Finique Windows are tested for real-life performance in every corner of the state.
               </p>
-              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-brand-navy">
-                Get Your Free Window Audit
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
+              <div className="flex justify-center lg:justify-start">
+                <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-brand-navy">
+                  Get Your Free Window Audit
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
             </motion.div>
             <motion.div variants={slideLeft} className="space-y-5">
               {[
@@ -588,29 +593,29 @@ const HomePage = () => {
 
       {/* 5c. The Weightless Journey (Process) Section */}
       <motion.section
-        className="bg-slate-50 py-16 lg:py-24 border-y border-slate-200"
+        className="bg-slate-50 py-12 lg:py-24 border-y border-slate-200"
         initial="hidden"
         whileInView="show"
         viewport={viewport}
         variants={staggerContainer}
       >
         <div className="container-shell">
-          <motion.div className="text-center max-w-3xl mx-auto mb-14" variants={slideUp}>
-            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-4">Our Process</span>
-            <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-4">The Weightless Journey</h3>
-            <p className="text-slate-600 text-base leading-relaxed">From first conversation to final installation — we handle every detail so you don't have to.</p>
+          <motion.div className="text-center max-w-2xl mx-auto mb-10 lg:mb-14 px-4" variants={slideUp}>
+            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-3">Our Process</span>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-navy leading-tight mb-3">The Weightless Journey</h3>
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed">From conversation to installation — every detail handled, every step of the way.</p>
           </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {[
               { step: "01", title: "The Dialogue", desc: "We don't sell; we educate. A free consultation to understand your home's orientation, lifestyle needs, and design goals." },
               { step: "02", title: "Precision Mapping", desc: "Expert measurement using laser technology — because a window is only as good as its fit. Zero guesswork, zero gaps." },
-              { step: "03", title: "Seamless Installation", desc: "Our trained technicians ensure a thermal-bridge-free installation. Clean, efficient, and built to perform from day one." },
+              { step: "03", title: "Seamless Installation", desc: "Trained technicians ensure a thermal-bridge-free installation. Clean, efficient, and built to perform from day one." },
               { step: "04", title: "The Finique Guarantee", desc: "Long-term peace of mind with dedicated after-sales support. We stand behind every window we install, for the long haul." }
             ].map((item, idx) => (
-              <motion.div key={idx} variants={slideUp} className="relative bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <span className="text-5xl font-black text-violet-100 leading-none block mb-4">{item.step}</span>
-                <h4 className="text-lg font-bold text-brand-navy mb-3">{item.title}</h4>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
+              <motion.div key={idx} variants={slideUp} className="relative bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <span className="text-4xl sm:text-5xl font-black text-violet-100 leading-none block mb-3">{item.step}</span>
+                <h4 className="text-base font-bold text-brand-navy mb-1.5">{item.title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>

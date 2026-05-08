@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppLoader from './components/AppLoader';
+import ScrollToTop from './components/ScrollToTop';
 import WebsitePreloader from './components/WebsitePreloader';
 import PublicLayout from './layouts/PublicLayout';
 
@@ -50,6 +51,7 @@ const App = () => {
 
   return (
     <>
+      <ScrollToTop />
       <WebsitePreloader isVisible={showPreloader} />
       <Suspense
         fallback={

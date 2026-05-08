@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect } from 'react';
 
-const isVideoUrl = (url = '') => url.includes('/video/upload/') || /\.(mp4|webm|mov|mkv|avi)$/i.test(url);
+
 
 const MediaModal = ({ mediaItem, onClose, onNext, onPrev, canNavigate }) => {
   useEffect(() => {
@@ -55,13 +55,7 @@ const MediaModal = ({ mediaItem, onClose, onNext, onPrev, canNavigate }) => {
             </div>
 
             <div className="relative flex min-h-[62vh] items-center justify-center bg-black">
-              {isVideoUrl(mediaItem.url) ? (
-                <video controls className="max-h-[78vh] w-full" autoPlay>
-                  <source src={mediaItem.url} />
-                </video>
-              ) : (
-                <img src={mediaItem.url} alt={mediaItem.projectTitle} className="max-h-[78vh] w-full object-contain" loading="eager" />
-              )}
+              <img src={mediaItem.url} alt={mediaItem.projectTitle} className="max-h-[78vh] w-full object-contain" loading="eager" />
 
               {canNavigate && (
                 <>

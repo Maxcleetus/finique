@@ -51,7 +51,7 @@ const ContactPage = () => {
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Corporate Office</h3>
                   <p className="text-brand-navy font-semibold text-lg leading-snug">FINIQUE Manufacturing Pvt. Ltd.</p>
                   <p className="text-slate-500 mb-2">Kerala, India</p>
-                  <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-violet-600 hover:text-violet-800 transition-colors inline-block">
+                  <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-brand-navy hover:text-violet-800 transition-colors inline-block">
                     Get Directions &rarr;
                   </a>
                 </div>
@@ -59,7 +59,7 @@ const ContactPage = () => {
                 {/* Phone */}
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Phone</h3>
-                  <a href="tel:+919876543210" className="text-brand-navy font-semibold text-lg hover:text-violet-600 transition-colors">
+                  <a href="tel:+919876543210" className="text-brand-navy font-semibold text-lg hover:text-brand-navy transition-colors">
                     +91 98765 43210
                   </a>
                   <p className="text-slate-500 text-sm mt-1">Mon - Sat, 9am - 6pm</p>
@@ -68,7 +68,7 @@ const ContactPage = () => {
                 {/* Email */}
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Email</h3>
-                  <a href="mailto:hello@finique.com" className="text-brand-navy font-semibold text-lg hover:text-violet-600 transition-colors">
+                  <a href="mailto:hello@finique.com" className="text-brand-navy font-semibold text-lg hover:text-brand-navy transition-colors">
                     hello@finique.com
                   </a>
                   <p className="text-slate-500 text-sm mt-1">For general & technical enquiries</p>

@@ -39,7 +39,7 @@ const AppLoader = ({ label = 'Loading...', className = '', inline = false }) => 
           {/* Center dot */}
           <div className="absolute inset-0 flex items-center justify-center">
             <motion.div
-              className="h-2 w-2 rounded-full bg-violet-600"
+              className="h-2 w-2 rounded-full bg-brand-navy"
               animate={{ scale: [1, 0.6, 1], opacity: [1, 0.5, 1] }}
               transition={{ duration: 0.9, repeat: Infinity, ease: 'easeInOut' }}
             />

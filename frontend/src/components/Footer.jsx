@@ -8,6 +8,7 @@ const LOCATION_URL =
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
+  { to: '/services', label: 'Services' },
   { to: '/products', label: 'Products' },
   { to: '/contact', label: 'Contact' }
 ];
@@ -42,7 +43,7 @@ const Footer = () => {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className="text-xs text-slate-550 hover:text-violet-600 transition-colors w-fit"
+                    className="text-xs text-slate-550 hover:text-brand-navy transition-colors w-fit"
                   >
                     {link.label}
                   </Link>
@@ -57,7 +58,7 @@ const Footer = () => {
                 href={LOCATION_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-violet-600 hover:text-brand-navy transition-colors"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-brand-navy hover:text-brand-navy transition-colors"
               >
                 MAP VIEW
                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,8 +70,8 @@ const Footer = () => {
             <motion.div variants={slideUp} className="col-span-2 sm:col-span-1">
               <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-navy mb-4">Support</h4>
               <div className="flex flex-col gap-2.5">
-                <a href="tel:+919876543210" className="text-xs text-slate-550 hover:text-violet-600 transition-colors">+91 98765 43210</a>
-                <a href="mailto:hello@finique.com" className="text-xs text-slate-550 hover:text-violet-600 transition-colors">hello@finique.com</a>
+                <a href="tel:+919876543210" className="text-xs text-slate-550 hover:text-brand-navy transition-colors">+91 98765 43210</a>
+                <a href="mailto:hello@finique.com" className="text-xs text-slate-550 hover:text-brand-navy transition-colors">hello@finique.com</a>
               </div>
             </motion.div>
           </div>

@@ -11,20 +11,22 @@ const WhyKeralaSection = () => {
       viewport={viewport}
       variants={staggerContainer}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(139,92,246,0.25)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
       <div className="container-shell relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <motion.div variants={slideRight} className="text-center lg:text-left">
-            <span className="inline-block rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-200 mb-5">Local Authority</span>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-5">Built for the Coast.<br />Proven in the Rain.</h3>
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
-              From the humid backwaters of Kochi to the relentless monsoons of Wayanad — Kerala's climate is unlike anywhere else. Finique Windows are tested for real-life performance in every corner of the state.
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white shadow-sm mb-6">
+              Local Authority
+            </span>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-white leading-[1.1] mb-6 tracking-tight">Built for the Coast.<br />Proven in the Rain.</h3>
+            <p className="text-slate-400 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 font-light">
+              For years, homes in Kerala have struggled with heavy monsoons, coastal corrosion, and urban noise. Traditional windows often fail — leading to leakage, rusting, and swelling. Finique solves these problems with engineering-led systems designed specifically for modern living in Kerala.
             </p>
             <div className="flex justify-center lg:justify-start">
-              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-brand-navy">
+              <Link to="/contact" className="inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-bold text-brand-navy shadow-lg transition-all duration-300 hover:bg-slate-200 hover:-translate-y-1">
                 Get Your Free Window Audit
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </Link>
             </div>
@@ -35,15 +37,15 @@ const WhyKeralaSection = () => {
               { icon: "M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z", title: "Wind Load Capacity", desc: "Engineered to withstand high-pressure winds in high-rise apartments and exposed hillside homes — tested to international wind resistance standards." },
               { icon: "M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10", title: "Monsoon Drainage Tracks", desc: "Integrated drainage channels within the frame profile ensure that not a single drop of water enters your living room — even during the harshest Karkidakam rains." }
             ].map((item, idx) => (
-              <div key={idx} className="flex items-start gap-5 bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-colors duration-300">
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-violet-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div key={idx} className="flex items-start gap-6 py-6 border-b border-white/10 last:border-0 group">
+                <div className="shrink-0 w-12 h-12 flex items-center justify-center text-white">
+                  <svg className="w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-bold text-white text-base mb-1">{item.title}</h4>
-                  <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                  <h4 className="font-gilroy font-extrabold text-white text-xl mb-3 tracking-tight">{item.title}</h4>
+                  <p className="text-slate-400 text-[15px] leading-relaxed font-light">{item.desc}</p>
                 </div>
               </div>
             ))}

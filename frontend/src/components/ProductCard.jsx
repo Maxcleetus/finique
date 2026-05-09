@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
         <div className="mt-5 flex items-center justify-between">
           <Link
             to={`/products/${product.slug}`}
-            className="text-sm font-bold text-violet-700 inline-flex items-center gap-1.5 hover:gap-3 transition-all duration-200"
+            className="text-sm font-bold text-brand-navy inline-flex items-center gap-1.5 hover:gap-3 transition-all duration-200"
           >
             Explore
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

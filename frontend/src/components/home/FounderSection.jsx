@@ -30,46 +30,39 @@ const FounderSection = () => {
 
         {/* Content Column */}
         <motion.div variants={slideLeft} className="text-center lg:text-left order-1 lg:order-2 flex flex-col items-center lg:items-start">
-          <span className="inline-block text-xs font-bold uppercase tracking-[0.25em] text-violet-700 mb-4 bg-violet-100/80 px-4 py-1.5 rounded-full">
+          <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-brand-navy mb-6 bg-slate-100 px-5 py-2 rounded-full border border-slate-200 shadow-sm">
             The Founder's Perspective
           </span>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy leading-tight sm:leading-[1.15] tracking-tight mb-5">
-            The Problem with the <br className="hidden sm:block lg:hidden xl:block" /> Standard Window.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy leading-tight sm:leading-[1.15] tracking-tight mb-8">
+            Beyond Specifications. <br className="hidden sm:block lg:hidden xl:block" /> It's How It Feels.
           </h2>
           
-          <div className="space-y-4 mb-8 text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl">
-            <p>
-              In Kerala, we don't just have weather — we have intensity. Heavy monsoons, salt air, and rising heat. Most windows are built for a showroom display, not for our climate's relentless reality.
+          <div className="space-y-6 mb-10 text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl text-left">
+            <p className="text-center lg:text-left">
+              Growing up inside a family business, our founder saw how building a home is one of life's most emotional investments. That journey inspired our simple philosophy:
             </p>
-            <p>
-              Over the years, I saw how poor window choices led to water leakage, unbearable heat buildup, noise, and constant maintenance.
+            
+            <blockquote className="border-l-4 border-brand-navy pl-6 py-4 my-8 bg-slate-50/80 rounded-r-2xl pr-6 shadow-sm flex flex-col justify-center">
+              <p className="italic font-medium text-lg sm:text-xl text-brand-navy leading-relaxed">
+                "People may forget the specifications of a window, but they never forget how a space made them feel. Finique was born to solve the 'Heavy Home' problem."
+              </p>
+            </blockquote>
+
+            <p className="text-center lg:text-left">
+              This human-centered approach influences everything we do—from design guidance to installation. We collaborate with architects and homeowners to ensure every window engineers quieter mornings and stronger protection for years to come.
             </p>
           </div>
-
-          {/* Mission Statement - Fixed truncation and optimized scaling */}
-          <div className="w-full max-w-2xl mb-8 relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-2xl blur opacity-15 group-hover:opacity-25 transition duration-500"></div>
-            <div className="relative bg-white border border-violet-100 rounded-2xl p-1 shadow-sm">
-                <p className="w-full text-center py-4 px-4 sm:px-6 bg-violet-50/50 rounded-xl text-brand-navy font-bold leading-snug tracking-tight text-lg sm:text-xl lg:text-2xl">
-                  Finique was born to solve the "Heavy Home" problem.
-                </p>
-            </div>
-          </div>
-
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-10 max-w-2xl">
-            We replace the weight of maintenance, the noise of the street, and the heat of the sun — with precision-engineered VEKA uPVC systems. Not to sell windows. But to help you understand what a good window should actually do.
-          </p>
           
           {/* Actions */}
           <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4">
-            <Link to="/about" className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-violet-950 hover:shadow-lg hover:-translate-y-0.5">
+            <Link to="/about" className="group inline-flex items-center justify-center gap-3 rounded-full bg-brand-navy px-8 py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-black shadow-lg hover:-translate-y-0.5">
               Our Story
-              <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </Link>
-            <Link to="/products" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white px-8 py-3.5 sm:py-4 text-sm sm:text-base font-bold text-brand-navy transition-all duration-300 hover:border-brand-navy hover:bg-slate-50">
+            <Link to="/products" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white px-8 py-4 text-sm sm:text-base font-bold text-brand-navy transition-all duration-300 hover:border-brand-navy hover:bg-slate-50">
               Explore Range
             </Link>
           </div>

@@ -4,7 +4,7 @@ import { slideUp, staggerContainer, viewport } from '../../utils/motion';
 const ProcessSection = () => {
   return (
     <motion.section
-      className="bg-slate-50 py-12 lg:py-24 border-y border-slate-200"
+      className="bg-white py-20 lg:py-32"
       initial="hidden"
       whileInView="show"
       viewport={viewport}
@@ -12,7 +12,7 @@ const ProcessSection = () => {
     >
       <div className="container-shell">
         <motion.div className="text-center max-w-2xl mx-auto mb-10 lg:mb-14 px-4" variants={slideUp}>
-          <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-3">Our Process</span>
+          <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm mb-5">Our Process</span>
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-navy leading-tight mb-3">The Weightless Journey</h3>
           <p className="text-slate-500 text-sm sm:text-base leading-relaxed">From conversation to installation — every detail handled, every step of the way.</p>
         </motion.div>
@@ -24,7 +24,7 @@ const ProcessSection = () => {
             { step: "04", title: "The Finique Guarantee", desc: "Long-term peace of mind with dedicated after-sales support. We stand behind every window we install, for the long haul." }
           ].map((item, idx) => (
             <motion.div key={idx} variants={slideUp} className="relative bg-white rounded-2xl p-5 sm:p-7 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <span className="text-4xl sm:text-5xl font-black text-violet-100 leading-none block mb-3">{item.step}</span>
+              <span className="text-4xl sm:text-5xl font-black text-white leading-none block mb-3">{item.step}</span>
               <h4 className="text-base font-bold text-brand-navy mb-1.5">{item.title}</h4>
               <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
             </motion.div>

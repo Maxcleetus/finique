@@ -46,7 +46,7 @@ const FeaturedProducts = ({ featured, loading }) => {
     >
       <motion.div className="flex flex-col md:flex-row md:items-end justify-between gap-6" variants={slideUp}>
         <div className="max-w-2xl">
-          <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-4">
+          <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm mb-5">
             Explore Collection
           </span>
           <motion.h2 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-brand-navy leading-tight" variants={slideUp}>

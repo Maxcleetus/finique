@@ -15,12 +15,12 @@ const ProductShowcaseRow = ({ product, index }) => {
       whileInView="show"
       viewport={viewport}
       variants={staggerContainer}
-      className="grid lg:grid-cols-2 gap-0 overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm hover:shadow-xl transition-shadow duration-500 group"
+      className="grid lg:grid-cols-2 gap-0 lg:gap-12 pb-16 lg:pb-24 border-b border-slate-200 last:border-0 group"
     >
       {/* Image */}
       <motion.div
         variants={isEven ? slideRight : slideLeft}
-        className={`relative overflow-hidden h-72 lg:h-auto min-h-[320px] bg-slate-100 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
+        className={`relative overflow-hidden h-72 sm:h-96 lg:h-full min-h-[320px] rounded-2xl ${isEven ? 'lg:order-1' : 'lg:order-2'}`}
       >
         <img
           src={product.images?.[0] || 'https://images.unsplash.com/photo-1565538420870-da08ff96a207?w=900'}
@@ -30,39 +30,37 @@ const ProductShowcaseRow = ({ product, index }) => {
           decoding="async"
         />
         {/* Category badge */}
-        <span className="absolute top-5 left-5 inline-block rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm">
+        <span className="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full border border-slate-200/50 bg-white/90 backdrop-blur-md px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm">
           {product.category}
         </span>
-        {/* Dark gradient on the image edge touching the text */}
-        <div className={`absolute inset-y-0 w-16 from-white/0 via-slate-900/5 to-slate-900/0 hidden lg:block ${isEven ? 'right-0 bg-gradient-to-l' : 'left-0 bg-gradient-to-r'}`} />
       </motion.div>
 
       {/* Text Content */}
       <motion.div
         variants={isEven ? slideLeft : slideRight}
-        className={`flex flex-col justify-center p-10 lg:p-14 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}
+        className={`flex flex-col justify-center py-10 lg:py-14 ${isEven ? 'lg:order-2' : 'lg:order-1'} ${isEven ? 'lg:pl-8' : 'lg:pr-8'}`}
       >
-        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-violet-600 mb-4">
+        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-navy mb-4">
           {product.category}
         </span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-navy leading-tight mb-5 group-hover:text-violet-900 transition-colors">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy leading-tight mb-8 tracking-tight group-hover:text-blue-800 transition-colors">
           {product.title}
         </h2>
-        <p className="text-slate-600 text-base leading-relaxed mb-8 line-clamp-3">
+        <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-10 font-light">
           {product.description}
         </p>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <Link
             to={`/products/${product.slug}`}
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-navy px-6 py-3 text-sm font-bold text-white shadow-md hover:-translate-y-0.5 hover:shadow-lg hover:bg-violet-950 transition-all duration-300"
+            className="inline-flex items-center gap-3 text-sm font-bold text-brand-navy transition-colors underline underline-offset-4 decoration-2 decoration-brand-navy/30 hover:decoration-brand-navy hover:text-blue-600"
           >
             Explore System
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </Link>
-          <span className="text-xs text-slate-400 font-semibold">Premium Quality</span>
+          <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">Premium System</span>
         </div>
       </motion.div>
     </motion.div>
@@ -121,7 +119,7 @@ const ProductsPage = () => {
           variants={staggerContainer}
         >
           <motion.div variants={slideUp} className="max-w-3xl">
-            <span className="inline-block rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-violet-200 mb-6">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-200 backdrop-blur-md shadow-sm mb-6">
               Our Range
             </span>
             <h1 className="text-5xl sm:text-6xl font-extrabold text-white leading-tight mb-5">

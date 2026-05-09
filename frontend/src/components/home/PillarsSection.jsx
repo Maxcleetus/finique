@@ -3,8 +3,8 @@ import { slideUp, staggerContainer, viewport } from '../../utils/motion';
 
 const featureData = [
   {
-    title: "Thermal Lift",
-    description: "Multi-chambered VEKA profiles block heat transfer, keeping your interiors significantly cooler and lowering your AC bills — even during Kerala's peak summer.",
+    title: "Thermal Endurance",
+    description: "Advanced insulation technology and multi-chambered VEKA profiles block heat transfer, keeping interiors cool and reducing energy costs during Kerala's peak summer.",
     icon: (
       <svg className="w-8 h-8 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -51,22 +51,34 @@ const PillarsSection = () => {
       variants={staggerContainer}
     >
       <div className="container-shell">
-        <motion.div className="text-center max-w-2xl mx-auto mb-10 lg:mb-14 px-4" variants={slideUp}>
-          <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-600 mb-3">The Finique Difference</span>
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-brand-navy leading-tight mb-3">Engineered for Kerala.<br className="hidden sm:block" /> Built to Last.</h3>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Every VEKA uPVC system we install is measured against Kerala's most demanding conditions. These are not features. These are expectations.
-          </p>
+        <motion.div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-16 mb-16 lg:mb-24" variants={slideUp}>
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-brand-navy mb-6 shadow-sm">
+              The Finique Standard
+            </span>
+            <h3 className="text-4xl sm:text-5xl lg:text-6xl font-gilroy font-extrabold text-brand-navy leading-tight tracking-tight">
+              Performance that lasts. Design that elevates.
+            </h3>
+          </div>
+          <div className="max-w-lg lg:border-l lg:border-slate-200 lg:pl-10 lg:pb-2">
+            <p className="text-slate-600 text-base sm:text-lg leading-relaxed font-light">
+              Our systems combine German precision engineering with aesthetic minimalism. We focus on what truly matters: Performance that lasts, Design that elevates spaces, and Trust that stays beyond installation.
+            </p>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16">
           {featureData.map((feature, idx) => (
-            <motion.div key={idx} variants={slideUp} className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-100 text-center flex flex-col items-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-brand-slate rounded-full flex items-center justify-center mb-4 sm:mb-6">
+            <motion.div 
+              key={idx} 
+              variants={slideUp} 
+              className="text-left flex flex-col items-start border-t border-slate-200 pt-8 mt-2 hover:-translate-y-1 transition-transform duration-300"
+            >
+              <div className="w-12 h-12 mb-6 text-brand-navy">
                 {feature.icon}
               </div>
-              <h4 className="text-base sm:text-lg font-bold text-brand-navy mb-2">{feature.title}</h4>
-              <p className="text-slate-500 text-sm leading-relaxed">{feature.description}</p>
+              <h4 className="text-xl font-gilroy font-extrabold text-brand-navy mb-4 tracking-tight">{feature.title}</h4>
+              <p className="text-slate-600 text-[15px] leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

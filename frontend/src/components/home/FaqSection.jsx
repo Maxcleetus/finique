@@ -29,17 +29,17 @@ const faqData = [
 const FAQItem = ({ faq, index }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className={`rounded-2xl border transition-all duration-300 ${isOpen ? 'bg-violet-50/50 border-violet-200 shadow-md' : 'bg-white border-slate-200/60 shadow-sm hover:border-slate-300'}`}>
+    <div className={`border-b transition-colors duration-300 ${isOpen ? 'border-brand-navy' : 'border-slate-200'}`}>
       <button 
         onClick={() => setIsOpen(!isOpen)} 
-        className="w-full flex justify-between items-center text-left focus:outline-none p-5 sm:p-6 group"
+        className="w-full flex justify-between items-center text-left focus:outline-none py-6 group"
       >
-        <div className="flex items-center gap-4 sm:gap-6 flex-1">
-          <span className={`text-xs sm:text-sm font-bold font-serif italic ${isOpen ? 'text-violet-600' : 'text-slate-400'}`}>0{index + 1}</span>
-          <h5 className={`flex-1 text-base sm:text-lg font-bold transition-colors ${isOpen ? 'text-violet-900' : 'text-brand-navy group-hover:text-violet-700'}`}>{faq.question}</h5>
+        <div className="flex items-center gap-6 flex-1 pr-4">
+          <span className={`text-sm font-gilroy font-extrabold transition-colors ${isOpen ? 'text-brand-navy' : 'text-slate-300'}`}>0{index + 1}</span>
+          <h5 className="flex-1 text-base sm:text-lg font-gilroy font-extrabold text-brand-navy">{faq.question}</h5>
         </div>
-        <div className={`ml-4 flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${isOpen ? 'bg-violet-600 text-white shadow-md' : 'bg-slate-100 text-slate-500 group-hover:bg-violet-100 group-hover:text-violet-600'}`}>
-          <svg className={`h-5 w-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className={`flex shrink-0 items-center justify-center transition-transform duration-300 ${isOpen ? 'rotate-180 text-brand-navy' : 'rotate-0 text-slate-400 group-hover:text-brand-navy'}`}>
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
@@ -53,8 +53,8 @@ const FAQItem = ({ faq, index }) => {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="px-5 pb-6 sm:px-6 sm:pb-8 pt-0 ml-7 sm:ml-10">
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">{faq.answer}</p>
+            <div className="pb-8 pt-0 pl-11 pr-4">
+              <p className="text-slate-600 text-[15px] leading-relaxed font-light">{faq.answer}</p>
             </div>
           </motion.div>
         )}
@@ -72,45 +72,37 @@ const FaqSection = () => {
       viewport={viewport}
       variants={staggerContainer}
     >
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-violet-100/50 rounded-full blur-[80px] pointer-events-none" />
-
-      <div className="grid lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-20 relative z-10 items-start">
+      <div className="container-shell relative z-10">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-24 items-start">
         <motion.div variants={slideRight} className="lg:sticky lg:top-32">
-          <span className="inline-block rounded-full bg-violet-100 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-700 mb-6">
+          <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm mb-6">
             Questions & Answers
           </span>
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-navy leading-tight mb-6">Frequently Asked Questions</h3>
-          <p className="text-slate-600 mb-8 text-base lg:text-lg">
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy leading-tight mb-6 tracking-tight">Frequently Asked Questions</h3>
+          <p className="text-slate-600 mb-10 text-base lg:text-lg max-w-md reading-relaxed">
             Have questions about uPVC windows for your Kerala home? Find clear, honest answers here — no jargon.
           </p>
           
-          <div className="relative overflow-hidden rounded-3xl bg-brand-navy p-8 shadow-2xl group">
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="relative z-10 flex flex-col items-start gap-4">
-              <div className="rounded-full bg-white/10 p-3 backdrop-blur-sm">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          <div className="border border-slate-200 rounded-3xl bg-slate-50 p-8 shadow-sm group">
+            <div className="flex flex-col items-start gap-3">
+              <h4 className="text-lg font-gilroy font-bold text-brand-navy">Still need help?</h4>
+              <p className="text-slate-500 text-[15px] mb-6 leading-relaxed">Our dedicated support team is ready to assist you with any custom architectural inquiries.</p>
+              <Link to="/contact" className="inline-flex items-center gap-3 text-sm font-bold text-brand-navy group-hover:text-black transition-colors underline underline-offset-4 decoration-2 decoration-brand-navy/30 hover:decoration-black">
+                Contact Support
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-white mb-2">Still need help?</h4>
-                <p className="text-slate-300 text-sm mb-6 leading-relaxed">Our dedicated support team is ready to assist you with any custom architectural inquiries.</p>
-                <Link to="/contact" className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-brand-navy shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:text-violet-700">
-                  Contact Support
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
-              </div>
+              </Link>
             </div>
           </div>
         </motion.div>
         
-        <motion.div variants={slideLeft} className="space-y-4">
+        <motion.div variants={slideLeft} className="flex flex-col border-t border-slate-200">
           {faqData.map((faq, index) => (
             <FAQItem key={index} faq={faq} index={index} />
           ))}
         </motion.div>
+        </div>
       </div>
     </motion.section>
   );

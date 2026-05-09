@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const siteUrl = (process.env.VITE_SITE_URL || 'https://finiquewindows.com').replace(/\/+$/, '');
+const siteUrl = (process.env.VITE_SITE_URL || 'https://finiqqauewindows.com').replace(/\/+$/, '');
 const publicDir = path.resolve(process.cwd(), 'public');
 
 const routes = [

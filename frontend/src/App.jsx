@@ -9,6 +9,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 
 
@@ -74,6 +75,14 @@ const App = () => {
             element={
               <PublicLayout>
                 <AboutPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <PublicLayout>
+                <ServicesPage />
               </PublicLayout>
             }
           />

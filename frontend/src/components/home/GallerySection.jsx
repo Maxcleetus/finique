@@ -90,7 +90,7 @@ const GallerySection = () => {
     >
       <div className="container-shell">
         <motion.div className="text-center max-w-3xl mx-auto mb-12" variants={slideUp}>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-600 mb-2">Our Work</h2>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-navy mb-2">Our Work</h2>
           <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight">Project Gallery</h3>
         </motion.div>
         <motion.div variants={slideUp}>

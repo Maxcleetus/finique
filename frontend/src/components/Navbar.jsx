@@ -5,6 +5,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
+  { to: '/services', label: 'Services' },
   { to: '/products', label: 'Products' },
   { to: '/contact', label: 'Contact' }
 ];
@@ -60,7 +61,7 @@ const Navbar = ({ onOpenEnquiry }) => {
                   {isActive && (
                     <motion.span
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-violet-600"
+                      className="absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-brand-navy"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}

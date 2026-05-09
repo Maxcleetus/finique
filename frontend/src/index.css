@@ -2,9 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/assets/fonts/Gilroy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/assets/fonts/Gilroy-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/assets/fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 
 :root {
-  color: #1a1f2f;
+  color: #000745;
   background: #ffffff;
 }
 
@@ -12,20 +33,22 @@ body {
   @apply bg-white text-brand-ink font-sans antialiased;
 }
 
-.container-shell {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-}
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
 
-.section-title {
-  @apply text-2xl sm:text-3xl font-bold text-brand-navy;
-}
+  .section-title {
+    @apply text-2xl sm:text-3xl font-bold font-gilroy text-brand-navy;
+  }
 
-.section-subtitle {
-  @apply mt-2 max-w-3xl text-sm sm:text-base text-slate-600;
-}
+  .section-subtitle {
+    @apply mt-2 max-w-3xl text-sm sm:text-base text-slate-600;
+  }
 
-.card {
-  @apply rounded-xl border border-brand-border bg-white p-5 shadow-panel;
+  .card {
+    @apply rounded-xl border border-brand-border bg-white p-5 shadow-panel;
+  }
 }
 
 .review-marquee {

@@ -84,7 +84,7 @@ const AboutPage = () => {
 
         <div className="container-shell py-24 lg:py-32 relative z-10">
           <motion.div variants={slideUp} className="max-w-3xl">
-            <span className="inline-block rounded-full border border-violet-400/30 bg-violet-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-violet-200 mb-8">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-200 backdrop-blur-md shadow-sm mb-6">
               Our Story
             </span>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-8">
@@ -126,8 +126,8 @@ const AboutPage = () => {
         variants={staggerContainer}
       >
         <motion.div className="text-center mb-16" variants={slideUp}>
-          <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-700 mb-4">Our Foundation</span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-navy">
+          <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm mb-5">Our Foundation</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy tracking-tight">
             Built on Purpose
           </h2>
         </motion.div>
@@ -137,11 +137,11 @@ const AboutPage = () => {
             variants={slideRight}
             className="group relative overflow-hidden rounded-3xl bg-brand-navy p-10 text-white shadow-2xl"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-white/5 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-violet-600/30 mb-6 border border-violet-400/20">
-                <svg className="w-6 h-6 text-violet-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-navy/30 mb-6 border border-violet-400/20">
+                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
@@ -156,10 +156,10 @@ const AboutPage = () => {
             variants={slideLeft}
             className="group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200 p-10 shadow-sm hover:shadow-xl transition-shadow duration-500"
           >
-            <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-violet-100/60 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-slate-500/60 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-violet-100 mb-6 border border-violet-200">
-                <svg className="w-6 h-6 text-violet-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-500 mb-6 border border-violet-200">
+                <svg className="w-6 h-6 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
@@ -173,7 +173,7 @@ const AboutPage = () => {
       </motion.section>
 
       {/* ── Manufacturing Process ── */}
-      <section className="bg-slate-50 border-y border-slate-200 py-20 lg:py-28">
+      <section className="bg-white border-y border-slate-200 py-20 lg:py-32">
         <motion.div
           className="container-shell"
           initial="hidden"
@@ -181,31 +181,31 @@ const AboutPage = () => {
           viewport={viewport}
           variants={staggerContainer}
         >
-          <motion.div className="text-center mb-16" variants={slideUp}>
-            <span className="inline-block rounded-full bg-violet-100 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-violet-700 mb-4">How We Work</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-navy">Manufacturing Process</h2>
-            <p className="mt-4 text-slate-600 max-w-xl mx-auto">
+          <motion.div className="text-center mb-20" variants={slideUp}>
+            <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm mb-5">How We Work</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy tracking-tight">Manufacturing Process</h2>
+            <p className="mt-6 text-slate-600 max-w-xl mx-auto text-lg leading-relaxed">
               Every FINIQUE product passes through a rigorous four-stage process designed to ensure flawless quality and precision.
             </p>
           </motion.div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, index) => (
               <motion.article
                 key={step.title}
                 variants={slideUp}
-                className="group relative rounded-3xl bg-white border border-slate-200 p-8 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="group relative border-t border-slate-200 pt-8"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-100 text-violet-700 group-hover:bg-violet-600 group-hover:text-white transition-colors duration-300 shrink-0">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-colors duration-300 shrink-0">
                     {step.icon}
                   </div>
-                  <span className="text-4xl font-black text-slate-100 group-hover:text-violet-50 transition-colors select-none">
+                  <span className="text-4xl font-black text-slate-200 group-hover:text-brand-navy transition-colors select-none">
                     0{index + 1}
                   </span>
                 </div>
-                <h3 className="text-base font-bold text-brand-navy mb-3 group-hover:text-violet-800 transition-colors">{step.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{step.detail}</p>
+                <h3 className="text-xl font-gilroy font-extrabold text-brand-navy mb-4 tracking-tight group-hover:text-blue-700 transition-colors">{step.title}</h3>
+                <p className="text-[15px] text-slate-600 leading-relaxed font-light">{step.detail}</p>
               </motion.article>
             ))}
           </div>
@@ -233,7 +233,7 @@ const AboutPage = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-brand-navy shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:text-violet-700"
+                className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-brand-navy shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:text-brand-navy"
               >
                 Explore Products
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -2,11 +2,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { slideUp, slideLeft, staggerContainer } from '../../utils/motion';
 
-const STATS = [
-  { value: '50+', label: 'Year Lifespan' },
-  { value: 'VEKA', label: 'Certified System' },
-];
-
 const ArrowIcon = () => (
   <svg
     className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -32,12 +27,36 @@ const LocationIcon = () => (
   </svg>
 );
 
+/* ── VEKA Badge — logo only ─────────────────────────────────── */
+const VekaBadge = () => (
+  <div
+    aria-label="VEKA Certified"
+    className="w-10 h-10 lg:w-20 lg:h-20 rounded-lg lg:rounded-xl bg-white shadow-md lg:shadow-lg flex items-center justify-center p-1.5 lg:p-2 flex-shrink-0"
+  >
+    <img
+      src="/veka-logo-png_seeklogo-252874.png"
+      alt="VEKA Certified"
+      className="w-full h-full object-contain"
+      draggable={false}
+    />
+  </div>
+);
+
 const HeroSection = () => {
   return (
     <section
       className="relative h-[85vh] min-h-[600px] overflow-hidden bg-brand-navy"
       aria-label="Hero"
     >
+      {/* VEKA badge — fixed to true bottom-right of hero, independent of content */}
+      <motion.div
+        variants={slideLeft}
+        initial="hidden"
+        animate="show"
+        className="absolute bottom-4 right-4 z-50"
+      >
+        <VekaBadge />
+      </motion.div>
       {/* Background — slow parallax zoom */}
       <motion.div
         className="absolute inset-0 z-0 origin-center"
@@ -87,15 +106,6 @@ const HeroSection = () => {
             animate="show"
             className="max-w-2xl lg:max-w-4xl mx-auto lg:mx-0 px-6 sm:px-8 py-10 text-center lg:text-left"
           >
-            {/* Certification pill */}
-            <motion.div variants={slideUp} className="flex justify-center lg:justify-start">
-               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-slate-200 backdrop-blur-md">
-                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" aria-hidden="true" />
-                 VEKA Certified System
-               </div>
-            </motion.div>
-
-            {/* Headline */}
             <motion.h1
               variants={slideUp}
               className="mt-6 text-4xl sm:text-5xl lg:text-7xl font-gilroy font-extrabold leading-[1.1] text-white tracking-tight"
@@ -111,7 +121,7 @@ const HeroSection = () => {
               variants={slideUp}
               className="mt-6 text-sm sm:text-base lg:text-lg leading-relaxed text-slate-400 max-w-lg mx-auto lg:mx-0 font-light"
             >
-              Premium uPVC window and door systems engineered for Kerala's unique climate. Designed for comfort, built for life.
+              uPVC window and door systems engineered for Kerala's unique climate. Designed for comfort, built for life.
             </motion.p>
 
             {/* CTA buttons */}
@@ -135,38 +145,8 @@ const HeroSection = () => {
                 Visit Experience Centre
               </Link>
             </motion.div>
+
           </motion.div>
-
-          {/* Floating stats badge — desktop only */}
-          <motion.aside
-            variants={slideLeft}
-            initial="hidden"
-            animate="show"
-            aria-label="Key credentials"
-            className="hidden lg:flex absolute bottom-4 right-4 items-center gap-6 rounded-3xl border border-white/20 bg-white/5 p-6 backdrop-blur-xl shadow-2xl overflow-hidden"
-          >
-            {/* Ambient glow */}
-            <div
-              className="absolute top-0 right-0 w-32 h-32 bg-slate-500 rounded-full mix-blend-screen filter blur-[40px] opacity-40 animate-pulse pointer-events-none"
-              aria-hidden="true"
-            />
-
-            {STATS.map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-6 relative z-10">
-                <div className="flex flex-col">
-                  <span className="text-3xl font-gilroy font-extrabold text-white">
-                    {stat.value}
-                  </span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white">
-                    {stat.label}
-                  </span>
-                </div>
-                {i < STATS.length - 1 && (
-                  <div className="w-px h-12 bg-white/10" aria-hidden="true" />
-                )}
-              </div>
-            ))}
-          </motion.aside>
         </div>
       </div>
     </section>

@@ -15,12 +15,12 @@ const FounderSection = () => {
         {/* Image Column */}
         <motion.div 
           variants={slideRight} 
-          className="relative max-md:hidden aspect-[4/3] lg:aspect-square xl:aspect-[4/3] w-full overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl lg:shadow-2xl order-2 lg:order-1"
+          className="relative hidden md:block w-11/12 lg:w-4/5 mx-auto overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl lg:shadow-2xl order-2 lg:order-1"
         >
           <img 
-            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200" 
+            src="/img.png" 
             alt="Kerala home with premium uPVC windows" 
-            className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            className="w-full h-auto transition-transform duration-700 hover:scale-105"
             loading="lazy"
             decoding="async"
           />
@@ -30,30 +30,42 @@ const FounderSection = () => {
 
         {/* Content Column */}
         <motion.div variants={slideLeft} className="text-center lg:text-left order-1 lg:order-2 flex flex-col items-center lg:items-start">
-          <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-brand-navy mb-6 bg-slate-100 px-5 py-2 rounded-full border border-slate-200 shadow-sm">
+          <span className="inline-block text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] text-brand-navy mb-6 border border-slate-300 px-4 py-1.5 rounded-full">
             The Founder's Perspective
           </span>
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy leading-tight sm:leading-[1.15] tracking-tight mb-8">
-            Beyond Specifications. <br className="hidden sm:block lg:hidden xl:block" /> It's How It Feels.
+            Built for Kerala's Climate. <br className="hidden sm:block lg:hidden xl:block" /> Made for Your Home.
           </h2>
           
           <div className="space-y-6 mb-10 text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl text-left">
             <p className="text-center lg:text-left">
-              Growing up inside a family business, our founder saw how building a home is one of life's most emotional investments. That journey inspired our simple philosophy:
+              At Finique Windows, we started with a simple mission — to solve the everyday window problems faced by South Indian homes.
+            </p>
+
+            <p className="text-center lg:text-left">
+              Heavy monsoons, termites, humidity, safety concerns, and high maintenance are challenges we have seen closely for years. That is why we are passionate about building durable, secure, and weather-resistant window systems designed for our climate and lifestyle.
             </p>
             
             <blockquote className="border-l-4 border-brand-navy pl-6 py-4 my-8 bg-slate-50/80 rounded-r-2xl pr-6 shadow-sm flex flex-col justify-center">
               <p className="italic font-medium text-lg sm:text-xl text-brand-navy leading-relaxed">
-                "People may forget the specifications of a window, but they never forget how a space made them feel. Finique was born to solve the 'Heavy Home' problem."
+                "For us, windows are not just products. They are a long-term part of how families experience comfort, safety, and peace at home."
               </p>
             </blockquote>
-
-            <p className="text-center lg:text-left">
-              This human-centered approach influences everything we do—from design guidance to installation. We collaborate with architects and homeowners to ensure every window engineers quieter mornings and stronger protection for years to come.
-            </p>
           </div>
-          
+
+          {/* Mobile-only image — sits between text and buttons */}
+          <div className="md:hidden w-full mb-8 relative overflow-hidden rounded-2xl shadow-xl">
+            <img
+              src="/img.png"
+              alt="Kerala home with premium uPVC windows"
+              className="w-full h-auto"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/30 via-transparent to-transparent pointer-events-none" />
+          </div>
+
           {/* Actions */}
           <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4">
             <Link to="/about" className="group inline-flex items-center justify-center gap-3 rounded-full bg-brand-navy px-8 py-4 text-sm sm:text-base font-bold text-white transition-all duration-300 hover:bg-black shadow-lg hover:-translate-y-0.5">

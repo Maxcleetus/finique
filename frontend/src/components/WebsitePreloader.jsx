@@ -59,7 +59,7 @@ const WebsitePreloader = ({ isVisible }) => {
               duration: 0.6,
             }}
           >
-            Premium Windows & Doors
+            uPVC Windows & Doors
           </motion.p>
 
           {/* Bottom shimmer */}

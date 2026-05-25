@@ -46,15 +46,9 @@ const FounderSection = () => {
             <p className="text-center lg:text-left">
               Heavy monsoons, termites, humidity, safety concerns, and high maintenance are challenges we have seen closely for years. That is why we are passionate about building durable, secure, and weather-resistant window systems designed for our climate and lifestyle.
             </p>
-            
-            <blockquote className="border-l-4 border-brand-navy pl-6 py-4 my-8 bg-slate-50/80 rounded-r-2xl pr-6 shadow-sm flex flex-col justify-center">
-              <p className="italic font-medium text-lg sm:text-xl text-brand-navy leading-relaxed">
-                "For us, windows are not just products. They are a long-term part of how families experience comfort, safety, and peace at home."
-              </p>
-            </blockquote>
           </div>
 
-          {/* Mobile-only image — sits between text and buttons */}
+          {/* Mobile-only image — sits between text paragraphs and blockquote */}
           <div className="md:hidden w-full mb-8 relative overflow-hidden rounded-2xl shadow-xl">
             <img
               src="/img.png"
@@ -65,6 +59,14 @@ const FounderSection = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/30 via-transparent to-transparent pointer-events-none" />
           </div>
+
+          <blockquote className="border-l-4 border-brand-navy pl-6 py-4 mb-10 w-full bg-slate-50/80 rounded-r-2xl pr-6 shadow-sm flex flex-col justify-center max-w-2xl text-left">
+            <p className="italic font-medium text-lg sm:text-xl text-brand-navy leading-relaxed">
+              "For us, windows are not just products. They are a long-term part of how families experience comfort, safety, and peace at home."
+            </p>
+          </blockquote>
+
+
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4">

@@ -53,7 +53,7 @@ const FeaturedProducts = ({ featured, loading }) => {
             Our Product Range
           </motion.h2>
           <motion.p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600" variants={slideUp}>
-            Discover our premium VEKA uPVC window and door systems — heat-resistant, soundproof, and zero-maintenance. Built for Kerala.
+            Discover our VEKA uPVC window and door systems — heat-resistant, soundproof, and zero-maintenance. Built for Kerala.
           </motion.p>
         </div>
         <div className="hidden items-center gap-3 md:flex">

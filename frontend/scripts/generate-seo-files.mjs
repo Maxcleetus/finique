@@ -34,7 +34,7 @@ Sitemap: ${siteUrl}/sitemap.xml
 const manifest = {
   name: 'FINIQUE',
   short_name: 'FINIQUE',
-  description: 'Premium aluminium windows and doors for residential and commercial projects.',
+  description: 'uPVC windows and doors for residential and commercial projects.',
   start_url: '/',
   display: 'standalone',
   background_color: '#ffffff',

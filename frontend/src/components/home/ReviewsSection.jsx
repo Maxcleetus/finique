@@ -11,7 +11,7 @@ const ReviewsSection = ({ reviews, loading }) => {
   const doubledReviews = [...reviews, ...reviews];
   
   // Dynamic duration based on number of reviews to keep speed consistent
-  const duration = reviews.length * 10; 
+  const duration = reviews.length * 20; 
 
   const startAnimation = () => {
     controls.start({

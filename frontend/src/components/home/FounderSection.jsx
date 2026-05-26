@@ -18,8 +18,8 @@ const FounderSection = () => {
           className="relative hidden md:block w-11/12 lg:w-4/5 mx-auto overflow-hidden rounded-2xl lg:rounded-3xl shadow-xl lg:shadow-2xl order-2 lg:order-1"
         >
           <img 
-            src="/img.png" 
-            alt="Kerala home with premium uPVC windows" 
+            src="/SHANAVAS TA.jpg.webp" 
+            alt="Shanavas TA - Founder" 
             className="w-full h-auto transition-transform duration-700 hover:scale-105"
             loading="lazy"
             decoding="async"
@@ -51,8 +51,8 @@ const FounderSection = () => {
           {/* Mobile-only image — sits between text paragraphs and blockquote */}
           <div className="md:hidden w-full mb-8 relative overflow-hidden rounded-2xl shadow-xl">
             <img
-              src="/img.png"
-              alt="Kerala home with premium uPVC windows"
+              src="/SHANAVAS TA.jpg.webp"
+              alt="Shanavas TA - Founder"
               className="w-full h-auto"
               loading="lazy"
               decoding="async"

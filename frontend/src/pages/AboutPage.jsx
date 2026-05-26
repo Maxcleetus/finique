@@ -57,16 +57,16 @@ const AboutPage = () => {
     name: `About ${siteConfig.name}`,
     url: buildCanonicalUrl('/about'),
     description:
-      'Learn about FINIQUE, our manufacturing process, quality standards, and premium aluminium window and door systems.'
+      'Learn about FINIQUE, our manufacturing process, quality standards, and uPVC window and door systems.'
   };
 
   return (
     <>
       <Seo
         title="About"
-        description="Learn about FINIQUE, our manufacturing process, and the premium aluminium window and door systems we deliver for modern projects."
+        description="Learn about FINIQUE, our manufacturing process, and the uPVC window and door systems we deliver for modern projects."
         schema={aboutSchema}
-        keywords="about FINIQUE, aluminium windows manufacturer, aluminium doors company, Kerala window manufacturer"
+        keywords="about FINIQUE, uPVC windows manufacturer, uPVC doors company, Kerala window manufacturer"
       />
 
       {/* ── Hero Section ── */}
@@ -94,7 +94,7 @@ const AboutPage = () => {
               </span>
             </h1>
             <p className="text-lg text-slate-100 leading-relaxed max-w-2xl">
-              FINIQUE is a premium aluminium windows and doors manufacturer focused on precision engineering, dependable lifecycle performance, and clean architectural aesthetics for residential and commercial projects.
+              FINIQUE is an uPVC windows and doors manufacturer focused on precision engineering, dependable lifecycle performance, and clean architectural aesthetics for residential and commercial projects.
             </p>
           </motion.div>
 
@@ -147,7 +147,7 @@ const AboutPage = () => {
               </div>
               <h3 className="text-2xl font-extrabold mb-4">Our Mission</h3>
               <p className="text-slate-300 leading-relaxed text-base">
-                To deliver high-performance aluminium systems that improve comfort, energy efficiency, and long-term project value while maintaining premium finish standards across every installation.
+                To deliver high-performance uPVC systems that improve comfort, energy efficiency, and long-term project value while maintaining high finish standards across every installation.
               </p>
             </div>
           </motion.article>
@@ -156,61 +156,21 @@ const AboutPage = () => {
             variants={slideLeft}
             className="group relative overflow-hidden rounded-3xl bg-slate-50 border border-slate-200 p-10 shadow-sm hover:shadow-xl transition-shadow duration-500"
           >
-            <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-slate-500/60 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-slate-200/50 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-slate-500 mb-6 border border-violet-200">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-white mb-6 border border-slate-200 shadow-sm">
                 <svg className="w-6 h-6 text-brand-navy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
               <h3 className="text-2xl font-extrabold text-brand-navy mb-4">Our Vision</h3>
               <p className="text-slate-600 leading-relaxed text-base">
-                To be the trusted benchmark in premium fenestration through disciplined manufacturing, transparent execution, and service reliability — setting the standard for modern architectural facades.
+                To be the trusted benchmark in fenestration through disciplined manufacturing, transparent execution, and service reliability — setting the standard for modern architectural facades.
               </p>
             </div>
           </motion.article>
         </div>
       </motion.section>
-
-      {/* ── Manufacturing Process ── */}
-      <section className="bg-white border-y border-slate-200 py-20 lg:py-32">
-        <motion.div
-          className="container-shell"
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-          variants={staggerContainer}
-        >
-          <motion.div className="text-center mb-20" variants={slideUp}>
-            <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-navy shadow-sm mb-5">How We Work</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy tracking-tight">Manufacturing Process</h2>
-            <p className="mt-6 text-slate-600 max-w-xl mx-auto text-lg leading-relaxed">
-              Every FINIQUE product passes through a rigorous four-stage process designed to ensure flawless quality and precision.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <motion.article
-                key={step.title}
-                variants={slideUp}
-                className="group relative border-t border-slate-200 pt-8"
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-brand-navy group-hover:bg-brand-navy group-hover:text-white transition-colors duration-300 shrink-0">
-                    {step.icon}
-                  </div>
-                  <span className="text-4xl font-black text-slate-200 group-hover:text-brand-navy transition-colors select-none">
-                    0{index + 1}
-                  </span>
-                </div>
-                <h3 className="text-xl font-gilroy font-extrabold text-brand-navy mb-4 tracking-tight group-hover:text-blue-700 transition-colors">{step.title}</h3>
-                <p className="text-[15px] text-slate-600 leading-relaxed font-light">{step.detail}</p>
-              </motion.article>
-            ))}
-          </div>
-        </motion.div>
-      </section>
 
       {/* ── CTA Banner ── */}
       <motion.section
@@ -228,7 +188,7 @@ const AboutPage = () => {
           <div className="relative z-10">
             <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">Ready to Build With FINIQUE?</h3>
             <p className="text-slate-300 mb-10 max-w-xl mx-auto text-lg">
-              Let's bring your architectural vision to life with our premium door and window systems.
+              Let's bring your architectural vision to life with our door and window systems.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link

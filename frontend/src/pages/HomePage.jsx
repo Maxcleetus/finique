@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import AppLoader from '../components/AppLoader';
 import Seo from '../components/Seo';
 import api from '../services/api';
 import { siteConfig, buildCanonicalUrl, toAbsoluteUrl } from '../utils/siteSeo';
@@ -9,16 +8,13 @@ import HeroSection from '../components/home/HeroSection';
 import FounderSection from '../components/home/FounderSection';
 import FeaturedProducts from '../components/home/FeaturedProducts';
 import GallerySection from '../components/home/GallerySection';
-import PillarsSection from '../components/home/PillarsSection';
-import WhyKeralaSection from '../components/home/WhyKeralaSection';
-import ProcessSection from '../components/home/ProcessSection';
 import ReviewsSection from '../components/home/ReviewsSection';
 import FaqSection from '../components/home/FaqSection';
 
 const HomePage = () => {
   const [featured, setFeatured] = useState([]);
   const [featuredLoading, setFeaturedLoading] = useState(true);
-  
+
   const [reviews, setReviews] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
 
@@ -38,14 +34,14 @@ const HomePage = () => {
       setReviewsLoading(true);
       try {
         const { data } = await api.get('/reviews');
-        setReviews(data.slice(0, 6)); 
+        setReviews(data.slice(0, 6));
       } catch {
         setReviews([]);
       } finally {
         setReviewsLoading(false);
       }
     };
-    
+
     fetchFeatured();
     fetchReviews();
   }, []);
@@ -72,12 +68,9 @@ const HomePage = () => {
 
       <HeroSection />
       <FounderSection />
-      <FeaturedProducts featured={featured} loading={featuredLoading} />
-      <GallerySection />
-      <PillarsSection />
-      <WhyKeralaSection />
-      <ProcessSection />
       <ReviewsSection reviews={reviews} loading={reviewsLoading} />
+      <GallerySection />
+      <FeaturedProducts featured={featured} loading={featuredLoading} />
       <FaqSection />
     </main>
   );

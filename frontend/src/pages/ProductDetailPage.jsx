@@ -69,7 +69,7 @@ const ProductDetailPage = () => {
         type="product"
         image={imageUrl}
         schema={productSchema}
-        keywords={`${product.title}, ${product.category}, aluminium ${product.category?.toLowerCase() || 'product'}, FINIQUE`}
+        keywords={`${product.title}, ${product.category}, uPVC ${product.category?.toLowerCase() || 'product'}, FINIQUE`}
       />
       <div className="grid gap-8 lg:grid-cols-3">
         <motion.div className="lg:col-span-2 space-y-6" variants={slideRight}>

@@ -14,16 +14,16 @@ const ContactPage = () => {
     '@type': 'ContactPage',
     name: `Contact ${siteConfig.name}`,
     url: buildCanonicalUrl('/contact'),
-    description: 'Contact FINIQUE for aluminium window and door consultations, pricing, and project enquiries.'
+    description: 'Contact FINIQUE for uPVC window and door consultations, pricing, and project enquiries.'
   };
 
   return (
     <>
       <Seo
         title="Contact"
-        description="Contact FINIQUE for aluminium window and door consultations, pricing, and project enquiries."
+        description="Contact FINIQUE for uPVC window and door consultations, pricing, and project enquiries."
         schema={contactSchema}
-        keywords="contact FINIQUE, aluminium windows enquiry, aluminium doors quote, window manufacturer contact Kerala"
+        keywords="contact FINIQUE, uPVC windows enquiry, uPVC doors quote, window manufacturer contact Kerala"
       />
 
       <motion.section
@@ -42,14 +42,14 @@ const ContactPage = () => {
                 Get in<br className="hidden sm:block" /> touch with us.
               </h1>
               <p className="text-slate-600 text-lg mb-12 max-w-md">
-                Our technical and sales team is ready to assist you with specifications, project planning, and premium aluminium enclosure systems.
+                Our technical and sales team is ready to assist you with specifications, project planning, and uPVC enclosure systems.
               </p>
 
               <div className="space-y-10">
                 {/* Office */}
                 <div>
-                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Corporate Office</h3>
-                  <p className="text-brand-navy font-semibold text-lg leading-snug">FINIQUE Manufacturing Pvt. Ltd.</p>
+                  <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Office</h3>
+                  <p className="text-brand-navy font-semibold text-lg leading-snug">Finique Windows</p>
                   <p className="text-slate-500 mb-2">Kerala, India</p>
                   <a href={LOCATION_URL} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-brand-navy hover:text-violet-800 transition-colors inline-block">
                     Get Directions &rarr;
@@ -59,17 +59,16 @@ const ContactPage = () => {
                 {/* Phone */}
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Phone</h3>
-                  <a href="tel:+919876543210" className="text-brand-navy font-semibold text-lg hover:text-brand-navy transition-colors">
-                    +91 98765 43210
+                  <a href="tel:+919961707373" className="text-brand-navy font-semibold text-lg hover:text-brand-navy transition-colors">
+                    +91 99617 07373
                   </a>
-                  <p className="text-slate-500 text-sm mt-1">Mon - Sat, 9am - 6pm</p>
                 </div>
 
                 {/* Email */}
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">Email</h3>
-                  <a href="mailto:hello@finique.com" className="text-brand-navy font-semibold text-lg hover:text-brand-navy transition-colors">
-                    hello@finique.com
+                  <a href="mailto:sales@finiquewindows.com" className="text-brand-navy font-semibold text-lg hover:text-brand-navy transition-colors">
+                    sales@finiquewindows.com
                   </a>
                   <p className="text-slate-500 text-sm mt-1">For general & technical enquiries</p>
                 </div>

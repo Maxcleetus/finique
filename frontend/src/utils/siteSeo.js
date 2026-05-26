@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'FINIQUE',
   legalName: 'FINIQUE Manufacturing Pvt. Ltd.',
   siteUrl: (import.meta.env.VITE_SITE_URL || 'https://finiquewindows.com').replace(/\/+$/, ''),
-  defaultTitle: 'Premium uPVC Windows & Doors Kerala | VEKA Certified | Finique',
+  defaultTitle: 'uPVC Windows & Doors Kerala | VEKA Certified | Finique',
   defaultDescription:
     'Finique Windows brings German-engineered VEKA uPVC systems to Kerala — built for monsoons, heat, and coastal air. Zero maintenance. 50+ year lifespan.',
   defaultImage: '/assets/logo.png',

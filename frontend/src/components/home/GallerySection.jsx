@@ -25,7 +25,7 @@ const GallerySlider = () => {
     const safeHalf = Array(halfMultiplier).fill(items).flat();
     const renderItems = [...safeHalf, ...safeHalf]; 
     
-    const scrollDuration = safeHalf.length * 18; 
+    const scrollDuration = safeHalf.length * 50; 
 
     return (
       <div className="flex overflow-hidden group py-2">
@@ -82,7 +82,7 @@ const GallerySlider = () => {
 const GallerySection = () => {
   return (
     <motion.section
-      className="bg-brand-slate py-16 lg:py-24"
+      className=" py-16 lg:py-24"
       initial="hidden"
       whileInView="show"
       viewport={viewport}

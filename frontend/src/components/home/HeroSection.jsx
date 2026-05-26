@@ -31,10 +31,10 @@ const LocationIcon = () => (
 const VekaBadge = () => (
   <div
     aria-label="VEKA Certified"
-    className="w-10 h-10 lg:w-20 lg:h-20 rounded-lg lg:rounded-xl bg-white shadow-md lg:shadow-lg flex items-center justify-center p-1.5 lg:p-2 flex-shrink-0"
+    className="w-10 h-10 lg:w-20 lg:h-20 rounded-lg lg:rounded-xl bg-white shadow-md lg:shadow-lg flex items-center justify-center p-1.5 lg:p-1 flex-shrink-0"
   >
     <img
-      src="/veka-logo-png_seeklogo-252874.png"
+      src="/images.png"
       alt="VEKA Certified"
       className="w-full h-full object-contain"
       draggable={false}
@@ -66,8 +66,8 @@ const HeroSection = () => {
         aria-hidden="true"
       >
         <img
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600"
-          alt=""
+          src="/shutterstock_195881123.webp"
+          alt="Home with finique windows"
           className="w-full h-full object-cover object-center sm:object-right"
           loading="eager"
           fetchpriority="high"
@@ -93,7 +93,12 @@ const HeroSection = () => {
 
       {/* Directional gradient — bottom-up for mobile, left-to-right for desktop */}
       <div
-        className="absolute inset-0 z-10 bg-gradient-to-t sm:bg-gradient-to-r from-[#000745] via-[#000745]/80 to-transparent pointer-events-none"
+        className="absolute inset-0 z-10 bg-gradient-to-t from-[#000745]/95 via-[#000745]/75 to-[#000745]/30 sm:bg-gradient-to-r sm:from-[#000745] sm:via-[#000745]/65 sm:to-transparent pointer-events-none"
+        aria-hidden="true"
+      />
+      {/* Subtle aesthetic overlay to enrich the colors */}
+      <div
+        className="absolute inset-0 z-[11] bg-gradient-to-bl from-transparent via-violet-900/10 to-transparent pointer-events-none mix-blend-overlay"
         aria-hidden="true"
       />
 

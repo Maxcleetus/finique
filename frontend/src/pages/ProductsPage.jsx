@@ -50,17 +50,16 @@ const ProductShowcaseRow = ({ product, index }) => {
           {product.description}
         </p>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center w-full">
           <Link
             to={`/products/${product.slug}`}
-            className="inline-flex items-center gap-3 text-sm font-bold text-brand-navy transition-colors underline underline-offset-4 decoration-2 decoration-brand-navy/30 hover:decoration-brand-navy hover:text-blue-600"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-sm font-bold text-white transition-all duration-300 hover:bg-black hover:shadow-lg"
           >
             Explore System
-            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </Link>
-          <span className="text-xs text-slate-400 font-bold uppercase tracking-widest">Premium System</span>
         </div>
       </motion.div>
     </motion.div>
@@ -94,7 +93,7 @@ const ProductsPage = () => {
     '@type': 'CollectionPage',
     name: `${siteConfig.name} Products`,
     url: buildCanonicalUrl('/products'),
-    description: 'Browse FINIQUE aluminium window and door systems for residential and commercial projects.'
+    description: 'Browse FINIQUE uPVC window and door systems for residential and commercial projects.'
   };
 
   return (

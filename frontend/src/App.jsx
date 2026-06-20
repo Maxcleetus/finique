@@ -4,6 +4,7 @@ import AppLoader from './components/AppLoader';
 import ScrollToTop from './components/ScrollToTop';
 import WebsitePreloader from './components/WebsitePreloader';
 import PublicLayout from './layouts/PublicLayout';
+import UnderDevelopmentPage from './pages/UnderDevelopmentPage';
 
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -16,8 +17,9 @@ const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
 const MIN_PRELOADER_MS = 2000;
+const MAINTENANCE_MODE = import.meta.env.VITE_MAINTENANCE_MODE !== 'false';
 
-const App = () => {
+const MainWebsite = () => {
   const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
@@ -117,5 +119,7 @@ const App = () => {
     </>
   );
 };
+
+const App = () => (MAINTENANCE_MODE ? <UnderDevelopmentPage /> : <MainWebsite />);
 
 export default App;

@@ -9,10 +9,6 @@ const faqData = [
     answer: "Absolutely. uPVC windows are among the best choices for Kerala's demanding climate. Their multi-chambered profiles provide excellent thermal insulation to keep rooms cooler, while their fully sealed systems resist water ingress during the heaviest monsoons. Unlike wood, uPVC does not rot or swell in humidity. Unlike aluminium, it doesn't corrode in coastal salt air. VEKA uPVC is specifically stabilized for UV resistance in tropical conditions, ensuring long-lasting performance without yellowing or brittleness."
   },
   {
-    question: "What is the difference between uPVC and aluminium windows?",
-    answer: "The key differences lie in insulation, maintenance, and longevity. uPVC windows have significantly lower thermal conductivity than aluminium, meaning they block heat far more effectively — critical for Kerala homes. uPVC is also maintenance-free (no painting, no rust, no corrosion), while aluminium can pit and corrode, especially near the coast. VEKA uPVC systems last 50+ years with minimal upkeep, making them a far more economical long-term investment for Kerala homeowners."
-  },
-  {
     question: "How do uPVC windows reduce noise from outside?",
     answer: "VEKA uPVC systems use precision multi-point locking hardware and double-sealed gaskets that create an airtight seal around the frame. Combined with double-glazed or laminated glass, this can achieve up to 40dB of noise reduction — effectively creating a sanctuary from street noise, traffic, and rain. This is especially valuable for homes near busy roads or urban areas."
   },
@@ -29,7 +25,7 @@ const faqData = [
 const FAQItem = ({ faq, index }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className={`border-b transition-colors duration-300 ${isOpen ? 'border-brand-navy' : 'border-slate-200'}`}>
+    <div className="transition-colors duration-300">
       <button 
         onClick={() => setIsOpen(!isOpen)} 
         className="w-full flex justify-between items-center text-left focus:outline-none py-6 group"
@@ -97,7 +93,7 @@ const FaqSection = () => {
           </div>
         </motion.div>
         
-        <motion.div variants={slideLeft} className="flex flex-col border-t border-slate-200">
+        <motion.div variants={slideLeft} className="flex flex-col">
           {faqData.map((faq, index) => (
             <FAQItem key={index} faq={faq} index={index} />
           ))}

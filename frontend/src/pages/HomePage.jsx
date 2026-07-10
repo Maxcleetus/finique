@@ -6,6 +6,7 @@ import { siteConfig, buildCanonicalUrl, toAbsoluteUrl } from '../utils/siteSeo';
 // Component Imports
 import HeroSection from '../components/home/HeroSection';
 import FounderSection from '../components/home/FounderSection';
+import SocialConnectSection from '../components/home/SocialConnectSection';
 import FeaturedProducts from '../components/home/FeaturedProducts';
 import GallerySection from '../components/home/GallerySection';
 import ReviewsSection from '../components/home/ReviewsSection';
@@ -68,6 +69,7 @@ const HomePage = () => {
 
       <HeroSection />
       <FounderSection />
+      <SocialConnectSection />
       <ReviewsSection reviews={reviews} loading={reviewsLoading} />
       <GallerySection />
       <FeaturedProducts featured={featured} loading={featuredLoading} />

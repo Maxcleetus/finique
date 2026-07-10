@@ -14,6 +14,7 @@ import enquiryRoutes from './routes/enquiryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
+import galleryRoutes from './routes/galleryRoutes.js';
 
 dotenv.config();
 if (fs.existsSync('.env.example')) {
@@ -56,6 +57,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/enquiries', enquiryRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/gallery', galleryRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

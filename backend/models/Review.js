@@ -6,6 +6,7 @@ const reviewSchema = new mongoose.Schema(
     location: { type: String, default: '', trim: true },
     rating: { type: Number, required: true, min: 1, max: 5 },
     text: { type: String, required: true, trim: true },
+    imageUrl: { type: String, default: '' },
     isPublished: { type: Boolean, default: true }
   },
   { timestamps: true }

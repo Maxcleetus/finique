@@ -5,8 +5,8 @@ import { slideLeft, slideRight, slideUp, staggerContainer, viewport } from '../u
 import { buildCanonicalUrl, siteConfig } from '../utils/siteSeo';
 
 const stats = [
-  { value: '10+', label: 'Years of Excellence' },
-  { value: '500+', label: 'Projects Delivered' },
+  { value: '28+', label: 'Years of Excellence' },
+  { value: '1100+', label: 'Projects Delivered' },
   { value: '100%', label: 'Quality Certified' },
   { value: '24/7', label: 'Customer Support' }
 ];
@@ -147,7 +147,7 @@ const AboutPage = () => {
               </div>
               <h3 className="text-2xl font-extrabold mb-4">Our Mission</h3>
               <p className="text-slate-300 leading-relaxed text-base">
-                To deliver high-performance uPVC systems that improve comfort, energy efficiency, and long-term project value while maintaining high finish standards across every installation.
+                To deliver high performance uPVC systems that improve comfort, energy efficiency, and long term project value while maintaining high finish standards across every installation.
               </p>
             </div>
           </motion.article>
@@ -165,10 +165,56 @@ const AboutPage = () => {
               </div>
               <h3 className="text-2xl font-extrabold text-brand-navy mb-4">Our Vision</h3>
               <p className="text-slate-600 leading-relaxed text-base">
-                To be the trusted benchmark in fenestration through disciplined manufacturing, transparent execution, and service reliability — setting the standard for modern architectural facades.
+                To be the trusted benchmark in fenestration through disciplined manufacturing, transparent execution, and service reliability setting the standard for modern architectural facades.
               </p>
             </div>
           </motion.article>
+        </div>
+      </motion.section>
+
+      {/* ── VEKA Collaboration Section ── */}
+      <motion.section
+        className="container-shell py-20 lg:py-28 border-t border-slate-100 relative overflow-hidden"
+        initial="hidden"
+        whileInView="show"
+        viewport={viewport}
+        variants={staggerContainer}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.slate.50),white)] opacity-60 pointer-events-none" />
+        
+        <div className="grid gap-12 lg:grid-cols-12 items-center relative z-10">
+          {/* Text Content & Mobile Logo */}
+          <motion.div variants={slideRight} className="lg:col-span-7 flex flex-col items-start text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-gilroy font-extrabold text-brand-navy leading-tight tracking-tight mb-6">
+              German Engineering.<br />Built for Kerala.
+            </h2>
+            
+            {/* Mobile-only VEKA Logo */}
+            <div className="block lg:hidden w-36 h-36 self-center rounded-2xl bg-white border border-slate-200 flex items-center justify-center p-4 mb-6 shadow-sm">
+              <img
+                src="/images.png"
+                alt="VEKA Logo"
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
+            </div>
+
+            <p className="text-slate-650 text-base sm:text-lg leading-relaxed font-normal">
+              FINIQUE partners with <strong>VEKA</strong>, the world-leading pioneer in uPVC profile systems. We exclusively use VEKA German-engineered uPVC profiles and specialized hardware to fabricate systems designed to handle the harshest tropical environments.
+            </p>
+          </motion.div>
+
+          {/* Desktop-only VEKA Logo */}
+          <motion.div variants={slideLeft} className="hidden lg:flex lg:col-span-5 justify-center lg:justify-end">
+            <div className="relative w-44 h-44 rounded-3xl bg-white border border-slate-200 flex items-center justify-center p-6 shadow-sm">
+              <img
+                src="/images.png"
+                alt="VEKA Logo"
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 

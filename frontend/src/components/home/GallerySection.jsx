@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MediaModal from '../MediaModal';
 import { slideUp, staggerContainer, viewport } from '../../utils/motion';
+import api from '../../services/api';
 
-const galleryImages = [
+const fallbackImages = [
   'https://images.unsplash.com/photo-1600607687930-cebc5a882aed?w=1200',
   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200',
   'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200',
@@ -14,12 +15,15 @@ const galleryImages = [
   'https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=1200',
 ];
 
-const galleryItems = galleryImages.map((src, i) => ({ src, originalIndex: i }));
-
-const GallerySlider = () => {
+const GallerySlider = ({ images }) => {
   const [activeMediaIndex, setActiveMediaIndex] = useState(null);
 
+  const half = Math.ceil(images.length / 2);
+  const row1 = images.slice(0, half).map((src, i) => ({ src, originalIndex: i }));
+  const row2 = images.slice(half).map((src, i) => ({ src, originalIndex: i + half }));
+
   const MarqueeRow = ({ items, direction = -1 }) => {
+    if (!items || items.length === 0) return null;
     const minItemsNeededForHalf = 10; 
     const halfMultiplier = Math.max(1, Math.ceil(minItemsNeededForHalf / items.length));
     const safeHalf = Array(halfMultiplier).fill(items).flat();
@@ -56,22 +60,22 @@ const GallerySlider = () => {
   return (
     <>
       <div className="w-full overflow-hidden rounded-3xl space-y-2">
-        <MarqueeRow items={galleryItems.slice(0, 4)} direction={-1} />
-        <MarqueeRow items={galleryItems.slice(4, 8)} direction={1} />
+        <MarqueeRow items={row1} direction={-1} />
+        {row2.length > 0 && <MarqueeRow items={row2} direction={1} />}
       </div>
       
       {activeMediaIndex !== null && (
         <MediaModal
           mediaItem={{
-            url: galleryImages[activeMediaIndex],
+            url: images[activeMediaIndex],
             category: 'Project Gallery',
             projectTitle: `Featured Project 0${activeMediaIndex + 1}`,
             index: activeMediaIndex,
-            total: galleryImages.length
+            total: images.length
           }}
           canNavigate={true}
-          onNext={() => setActiveMediaIndex((prev) => (prev + 1) % galleryImages.length)}
-          onPrev={() => setActiveMediaIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)}
+          onNext={() => setActiveMediaIndex((prev) => (prev + 1) % images.length)}
+          onPrev={() => setActiveMediaIndex((prev) => (prev - 1 + images.length) % images.length)}
           onClose={() => setActiveMediaIndex(null)}
         />
       )}
@@ -80,6 +84,27 @@ const GallerySlider = () => {
 };
 
 const GallerySection = () => {
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const { data } = await api.get('/gallery');
+        if (data && data.length > 0) {
+          setGalleryImages(data.map((item) => item.image));
+        } else {
+          setGalleryImages(fallbackImages);
+        }
+      } catch (error) {
+        setGalleryImages(fallbackImages);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGallery();
+  }, []);
+
   return (
     <motion.section
       className=" py-16 lg:py-24"
@@ -94,7 +119,7 @@ const GallerySection = () => {
           <h3 className="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight">Project Gallery</h3>
         </motion.div>
         <motion.div variants={slideUp}>
-          <GallerySlider />
+          {!loading && <GallerySlider images={galleryImages} />}
         </motion.div>
       </div>
     </motion.section>

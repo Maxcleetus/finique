@@ -12,6 +12,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const ProductDetailPage = lazy(() => import('./pages/ProductDetailPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 
 
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
@@ -109,6 +110,14 @@ const MainWebsite = () => {
             element={
               <PublicLayout>
                 <ContactPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/projects"
+            element={
+              <PublicLayout>
+                <ProjectsPage />
               </PublicLayout>
             }
           />

@@ -7,6 +7,7 @@ import AdminLoginPage from './admin/AdminLoginPage';
 import AdminProductsPage from './admin/AdminProductsPage';
 import AdminProjectsPage from './admin/AdminProjectsPage';
 import AdminReviewsPage from './admin/AdminReviewsPage';
+import AdminGalleryPage from './admin/AdminGalleryPage';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="products" element={<AdminProductsPage />} />
           <Route path="projects" element={<AdminProjectsPage />} />
           <Route path="reviews" element={<AdminReviewsPage />} />
+          <Route path="gallery" element={<AdminGalleryPage />} />
           <Route path="enquiries" element={<AdminEnquiriesPage />} />
         </Route>
       </Route>

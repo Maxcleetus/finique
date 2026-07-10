@@ -6,12 +6,16 @@ const baseForm = {
   location: '',
   rating: 5,
   text: '',
+  imageUrl: '',
   isPublished: true
 };
 
 const AdminReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
   const [form, setForm] = useState(baseForm);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [fileInputKey, setFileInputKey] = useState(0);
   const [status, setStatus] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -32,8 +36,22 @@ const AdminReviewsPage = () => {
     fetchReviews();
   }, []);
 
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreview('');
+      return undefined;
+    }
+
+    const previewUrl = URL.createObjectURL(imageFile);
+    setImagePreview(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [imageFile]);
+
   const resetForm = () => {
     setForm(baseForm);
+    setImageFile(null);
+    setFileInputKey((prev) => prev + 1);
     setEditingId(null);
   };
 
@@ -44,20 +62,31 @@ const AdminReviewsPage = () => {
       location: review.location || '',
       rating: Number(review.rating) || 5,
       text: review.text || '',
+      imageUrl: review.imageUrl || '',
       isPublished: review.isPublished !== false
     });
+    setImageFile(null);
+    setFileInputKey((prev) => prev + 1);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('');
 
+    const payload = new FormData();
+    payload.append('name', form.name);
+    payload.append('location', form.location);
+    payload.append('rating', String(form.rating));
+    payload.append('text', form.text);
+    payload.append('isPublished', String(form.isPublished));
+    if (imageFile) payload.append('image', imageFile);
+
     try {
       if (editingId) {
-        await api.put(`/reviews/${editingId}`, form);
+        await api.put(`/reviews/${editingId}`, payload);
         setStatus('Review updated successfully.');
       } else {
-        await api.post('/reviews', form);
+        await api.post('/reviews', payload);
         setStatus('Review added successfully.');
       }
       resetForm();
@@ -73,6 +102,18 @@ const AdminReviewsPage = () => {
       fetchReviews();
     } catch (error) {
       setStatus(error.response?.data?.message || 'Failed to delete review');
+    }
+  };
+
+  const removeImage = async (id) => {
+    try {
+      await api.delete(`/reviews/${id}/image`);
+      if (editingId === id) {
+        setForm((prev) => ({ ...prev, imageUrl: '' }));
+      }
+      fetchReviews();
+    } catch (error) {
+      setStatus(error.response?.data?.message || 'Failed to remove review image');
     }
   };
 
@@ -122,10 +163,33 @@ const AdminReviewsPage = () => {
           rows="4"
           value={form.text}
           onChange={(e) => setForm((prev) => ({ ...prev, text: e.target.value }))}
-          placeholder="Review text"
+          placeholder="Review quote"
           required
           className="w-full rounded-md border border-brand-border px-3 py-2 text-sm"
         />
+        <div className="grid gap-4 md:grid-cols-[1fr,180px]">
+          <label className="block rounded-md border border-brand-border px-3 py-3 text-sm">
+            <span className="mb-2 block font-semibold text-brand-navy">Client background image</span>
+            <input
+              key={fileInputKey}
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+              className="w-full text-sm"
+            />
+            {editingId && form.imageUrl && !imageFile && (
+              <span className="mt-2 block text-xs text-slate-500">Upload a new image to replace the current one.</span>
+            )}
+          </label>
+          {(imagePreview || form.imageUrl) && (
+            <img
+              src={imagePreview || form.imageUrl}
+              alt="Review background preview"
+              className="h-28 w-full rounded-md border border-brand-border object-cover"
+              loading="lazy"
+            />
+          )}
+        </div>
         <div className="flex flex-wrap gap-3">
           <button type="submit" className="rounded-md bg-brand-navy px-4 py-2 text-sm font-semibold text-white">
             {editingId ? 'Update Review' : 'Save Review'}
@@ -184,6 +248,18 @@ const AdminReviewsPage = () => {
               ))}
             </div>
             <p className="text-sm text-slate-600">{review.text}</p>
+            {review.imageUrl && (
+              <div className="max-w-xs rounded-md border border-brand-border p-2">
+                <img src={review.imageUrl} alt={review.name} className="h-28 w-full rounded object-cover" loading="lazy" />
+                <button
+                  type="button"
+                  onClick={() => removeImage(review._id)}
+                  className="mt-2 w-full rounded border border-red-300 px-2 py-1 text-xs font-semibold text-red-700"
+                >
+                  Remove Image
+                </button>
+              </div>
+            )}
           </article>
         ))}
       </div>

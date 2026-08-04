@@ -103,13 +103,13 @@ const HeroSection = () => {
       />
 
       {/* Foreground content */}
-      <div className="absolute inset-0 z-40 flex items-center justify-center lg:justify-start">
+      <div className="absolute inset-0 z-40 flex items-center justify-start">
         <div className="container-shell w-full relative">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="show"
-            className="max-w-2xl lg:max-w-4xl mx-auto lg:mx-0 px-6 sm:px-8 py-10 text-center lg:text-left"
+            className="max-w-xl sm:max-w-2xl lg:max-w-4xl px-4 sm:px-8 py-10 text-left"
           >
             <motion.h1
               variants={slideUp}
@@ -124,7 +124,7 @@ const HeroSection = () => {
             {/* Sub-headline */}
             <motion.p
               variants={slideUp}
-              className="mt-6 text-sm sm:text-base lg:text-lg leading-relaxed text-slate-400 max-w-lg mx-auto lg:mx-0 font-light"
+              className="mt-6 text-sm sm:text-base lg:text-lg leading-relaxed text-slate-400 max-w-md sm:max-w-lg font-light"
             >
               uPVC window and door systems engineered for Kerala's unique climate. Designed for comfort, built for life.
             </motion.p>
@@ -132,11 +132,11 @@ const HeroSection = () => {
             {/* CTA buttons */}
             <motion.div
               variants={slideUp}
-              className="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start"
+              className="mt-8 flex flex-row flex-wrap gap-3 sm:gap-4 items-center justify-start"
             >
               <Link
                 to="/products"
-                className="w-full sm:w-auto group inline-flex items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-bold text-brand-navy transition-all duration-300 hover:bg-slate-100"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full bg-white px-5 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-brand-navy transition-all duration-300 hover:bg-slate-100 shadow-md"
               >
                 Explore Collections
                 <ArrowIcon />
@@ -144,7 +144,7 @@ const HeroSection = () => {
 
               <Link
                 to="/contact"
-                className="w-full sm:w-auto group inline-flex items-center justify-center gap-3 rounded-full border border-white/20 bg-transparent px-8 py-4 text-sm font-bold text-white transition-all duration-300 hover:bg-white/10"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full border border-white/25 bg-white/5 backdrop-blur-sm px-5 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white transition-all duration-300 hover:bg-white/15"
               >
                 <LocationIcon />
                 Visit Experience Centre

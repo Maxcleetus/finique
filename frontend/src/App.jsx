@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop';
 import WebsitePreloader from './components/WebsitePreloader';
 import PublicLayout from './layouts/PublicLayout';
 import UnderDevelopmentPage from './pages/UnderDevelopmentPage';
+import Lenis from 'lenis';
 
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -52,6 +53,36 @@ const MainWebsite = () => {
       window.removeEventListener('load', completePreloader);
     };
   }, []);
+
+  useEffect(() => {
+    if (showPreloader) return;
+
+    const lenis = new Lenis({
+      duration: 0.9, // faster response time (less floaty)
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.8, // lower multiplier for controlled scrolling distance
+      touchMultiplier: 1.5,
+    });
+
+    let animationFrameId;
+
+    const raf = (time) => {
+      lenis.raf(time);
+      animationFrameId = requestAnimationFrame(raf);
+    };
+
+    animationFrameId = requestAnimationFrame(raf);
+    window.lenis = lenis;
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lenis.destroy();
+      window.lenis = null;
+    };
+  }, [showPreloader]);
 
   return (
     <>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import MediaModal from '../MediaModal';
 import { slideUp, staggerContainer, viewport } from '../../utils/motion';
 import api from '../../services/api';
+import { useInfiniteMarquee } from '../../utils/useInfiniteMarquee';
 
 const fallbackImages = [
   'https://images.unsplash.com/photo-1600607687930-cebc5a882aed?w=1200',
@@ -22,21 +23,39 @@ const GallerySlider = ({ images }) => {
   const row1 = images.slice(0, half).map((src, i) => ({ src, originalIndex: i }));
   const row2 = images.slice(half).map((src, i) => ({ src, originalIndex: i + half }));
 
-  const MarqueeRow = ({ items, direction = -1 }) => {
+  const MarqueeRow = ({ items, direction = 1 }) => {
     if (!items || items.length === 0) return null;
     const minItemsNeededForHalf = 10; 
     const halfMultiplier = Math.max(1, Math.ceil(minItemsNeededForHalf / items.length));
     const safeHalf = Array(halfMultiplier).fill(items).flat();
     const renderItems = [...safeHalf, ...safeHalf]; 
     
-    const scrollDuration = safeHalf.length * 50; 
+    const {
+      containerRef,
+      x,
+      halfWidth,
+      dragHandlers,
+      hoverHandlers,
+    } = useInfiniteMarquee({
+      speed: 0.6, // slow and smooth scroll
+      direction: direction,
+      pauseOnHover: true,
+      dependency: items.length,
+    });
 
     return (
-      <div className="flex overflow-hidden group py-2">
+      <div 
+        ref={containerRef}
+        className="w-full overflow-hidden py-2 cursor-grab active:cursor-grabbing select-none"
+        {...hoverHandlers}
+      >
         <motion.div
+          style={{ x }}
+          drag="x"
+          dragConstraints={{ left: -halfWidth, right: 0 }}
+          dragElastic={0.15}
+          {...dragHandlers}
           className="flex gap-4 min-w-max pr-4"
-          animate={{ x: direction === -1 ? ["0%", "-50%"] : ["-50%", "0%"] }}
-          transition={{ ease: "linear", duration: scrollDuration, repeat: Infinity }}
         >
           {renderItems.map((item, i) => (
             <div 
@@ -44,7 +63,12 @@ const GallerySlider = ({ images }) => {
               onClick={() => setActiveMediaIndex(item.originalIndex)}
               className="cursor-pointer w-[260px] sm:w-[350px] lg:w-[450px] h-[180px] sm:h-[250px] lg:h-[320px] shrink-0 rounded-2xl overflow-hidden shadow-lg border border-slate-200/50 relative group/img"
             >
-              <img src={item.src} alt={`Project Gallery ${i}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" loading="lazy" />
+              <img 
+                src={item.src} 
+                alt={`Project Gallery ${i}`} 
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105 pointer-events-none" 
+                loading="lazy" 
+              />
               <div className="absolute inset-0 bg-brand-navy/0 transition-colors duration-300 group-hover/img:bg-brand-navy/20 flex items-center justify-center">
                 <svg className="w-8 h-8 text-white opacity-0 transition-opacity duration-300 group-hover/img:opacity-100 drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -60,8 +84,8 @@ const GallerySlider = ({ images }) => {
   return (
     <>
       <div className="w-full overflow-hidden rounded-3xl space-y-2">
-        <MarqueeRow items={row1} direction={-1} />
-        {row2.length > 0 && <MarqueeRow items={row2} direction={1} />}
+        <MarqueeRow items={row1} direction={1} />
+        {row2.length > 0 && <MarqueeRow items={row2} direction={-1} />}
       </div>
       
       {activeMediaIndex !== null && (

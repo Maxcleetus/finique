@@ -80,6 +80,56 @@ const sendEnquiryEmail = async (enquiry, productTitle = null) => {
   }
 };
 
+const sendClientThankYouEmail = async (enquiry, productTitle = null) => {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+
+  const { name, email } = enquiry;
+  if (!email) return;
+
+  const resend = new Resend(apiKey);
+
+  try {
+    await resend.emails.send({
+      from: 'Finique <info@finiquewindows.com>',
+      to: email,
+      subject: `Thank you for contacting Finique, ${name}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1a1f2f; max-width: 600px; margin: 0 auto; border: 1px solid #d9dee8; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <div style="background-color: #000745; padding: 24px; text-align: center; color: #ffffff;">
+            <h2 style="margin: 0; font-size: 20px; font-weight: bold; tracking: 1.5px;">THANK YOU FOR GETTING IN TOUCH</h2>
+          </div>
+          <div style="padding: 24px; background-color: #ffffff;">
+            <p style="margin-top: 0; font-size: 16px; font-weight: bold; color: #000745;">Dear ${name},</p>
+            <p style="font-size: 14px; color: #333333;">Thank you for contacting Finique. We have successfully received your enquiry.</p>
+            <p style="font-size: 14px; color: #333333;">Our team is reviewing your requirements, and a Finique representative will contact you shortly to discuss your project.</p>
+            
+            ${productTitle ? `
+            <div style="margin: 20px 0; padding: 16px; background-color: #f4f6fa; border-radius: 8px;">
+              <p style="margin: 0; font-size: 14px; color: #555555;"><strong>Inquired Product:</strong> ${productTitle}</p>
+            </div>
+            ` : ''}
+
+            <p style="font-size: 14px; color: #333333; margin-top: 24px;">If you have any urgent queries, feel free to reply to this email or contact us at <a href="tel:+919961707373" style="color: #000745; text-decoration: none; font-weight: bold;">+91 99617 07373</a>.</p>
+            
+            <p style="font-size: 14px; color: #555555; margin-top: 32px; border-top: 1px solid #f4f6fa; padding-top: 16px;">
+              Best regards,<br />
+              <strong>Team Finique</strong><br />
+              <a href="https://finiquewindows.com" style="color: #000745; text-decoration: none;">www.finiquewindows.com</a>
+            </p>
+          </div>
+          <div style="background-color: #f4f6fa; padding: 16px; text-align: center; border-top: 1px solid #d9dee8;">
+            <p style="margin: 0; font-size: 12px; color: #777777;">This is an automated confirmation of your website submission.</p>
+          </div>
+        </div>
+      `
+    });
+    console.log(`[Resend] Success: Thank-you email sent to client at ${email}`);
+  } catch (error) {
+    console.error(`[Resend] Error sending thank-you email to ${email}:`, error.message);
+  }
+};
+
 export const createEnquiry = asyncHandler(async (req, res) => {
   const { name, phone, email, message, productId } = req.body;
 
@@ -125,6 +175,9 @@ export const createEnquiry = asyncHandler(async (req, res) => {
 
   // Send email in background
   sendEnquiryEmail(enquiry, productTitle);
+  if (enquiry.email) {
+    sendClientThankYouEmail(enquiry, productTitle);
+  }
 
   res.status(201).json({ message: 'Enquiry submitted successfully', enquiry });
 });

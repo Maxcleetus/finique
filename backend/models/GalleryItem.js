@@ -4,6 +4,7 @@ const galleryItemSchema = new mongoose.Schema(
   {
     image: { type: String, required: true },
     title: { type: String, trim: true, default: '' },
+    galleryImages: [{ type: String }],
     createdAt: { type: Date, default: Date.now }
   },
   { timestamps: true }

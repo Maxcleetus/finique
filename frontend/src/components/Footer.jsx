@@ -70,8 +70,8 @@ const Footer = () => {
             <motion.div variants={slideUp} className="col-span-2 sm:col-span-1">
               <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-navy mb-4">Support</h4>
               <div className="flex flex-col gap-2.5">
-                <a href="tel:+919876543210" className="text-xs text-slate-550 hover:text-brand-navy transition-colors">+91 98765 43210</a>
-                <a href="mailto:hello@finique.com" className="text-xs text-slate-550 hover:text-brand-navy transition-colors">hello@finique.com</a>
+                <a href="tel:+919961707373" className="text-xs text-slate-550 hover:text-brand-navy transition-colors">+91 99617 07373</a>
+                <a href="mailto:sales@finiquewindows.com" className="text-xs text-slate-550 hover:text-brand-navy transition-colors">sales@finiquewindows.com</a>
               </div>
             </motion.div>
           </div>

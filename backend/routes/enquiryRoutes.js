@@ -5,10 +5,11 @@ import {
   updateEnquiryStatus
 } from '../controllers/enquiryController.js';
 import { protectAdmin } from '../middleware/authMiddleware.js';
+import { upload } from '../middleware/uploadMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', createEnquiry);
+router.post('/', upload.single('attachment'), createEnquiry);
 router.get('/', protectAdmin, getEnquiries);
 router.patch('/:id/status', protectAdmin, updateEnquiryStatus);
 

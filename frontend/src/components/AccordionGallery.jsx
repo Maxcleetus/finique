@@ -237,8 +237,30 @@ const AccordionGallery = ({
             {showLabels && (
               <span className="ag-panel__label" aria-hidden="true">
                 <span className="ag-panel__bar" ref={el => (barRefs.current[i] = el)} />
-                <span className="ag-panel__text" ref={el => (textRefs.current[i] = el)}>
-                  {item.label}
+                <span 
+                  className="ag-panel__text flex flex-col items-start" 
+                  ref={el => (textRefs.current[i] = el)}
+                  style={{ whiteSpace: 'normal', overflow: 'visible' }}
+                >
+                  <span className="leading-tight">{item.label}</span>
+                  {isActive && (
+                    <span 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (onZoomClick) {
+                          onZoomClick(i);
+                        }
+                      }}
+                      className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] text-amber-400 mt-1.5 flex items-center gap-1 transition-all duration-300 cursor-pointer"
+                      style={{ pointerEvents: 'auto' }}
+                    >
+                      <span>View Project Photos</span>
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  )}
                 </span>
               </span>
             )}

@@ -61,17 +61,27 @@ const WebsitePreloader = ({ onComplete }) => {
       className="fixed inset-0 z-[130] flex flex-col items-center justify-center bg-white"
     >
       {imagesLoaded ? (
-        <div className="flex items-center justify-center h-14 mb-2 gap-0">
-          {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
-            <img
-              key={idx}
-              src={`/assets/logo_letter_${idx}.png`}
-              alt=""
-              className={`preloader-letter h-14 w-auto object-contain ${animate ? 'animating' : ''}`}
-              style={{ animationDelay: `${idx * 0.12}s` }}
-            />
-          ))}
-        </div>
+        <>
+          <div className="flex items-center justify-center h-14 mb-2 gap-0">
+            {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
+              <img
+                key={idx}
+                src={`/assets/logo_letter_${idx}.png`}
+                alt=""
+                className={`preloader-letter h-14 w-auto object-contain ${animate ? 'animating' : ''}`}
+                style={{ animationDelay: `${idx * 0.12}s` }}
+              />
+            ))}
+          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={animate ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="mt-8 text-[10px] font-bold uppercase tracking-[0.28em] text-slate-400"
+          >
+            uPVC Windows & Doors
+          </motion.p>
+        </>
       ) : (
         <div className="h-14 mb-2" />
       )}

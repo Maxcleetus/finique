@@ -69,11 +69,11 @@ const HomePage = () => {
 
       <HeroSection />
       <FounderSection />
-      <SocialConnectSection />
       <ReviewsSection reviews={reviews} loading={reviewsLoading} />
       <GallerySection />
       <FeaturedProducts featured={products} loading={productsLoading} />
       <FaqSection />
+      <SocialConnectSection />
     </main>
   );
 };

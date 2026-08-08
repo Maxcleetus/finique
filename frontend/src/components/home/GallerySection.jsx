@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import MediaModal from '../MediaModal';
+import { useNavigate } from 'react-router-dom';
 import { slideUp, staggerContainer, viewport } from '../../utils/motion';
 import api from '../../services/api';
 import AccordionGallery from '../AccordionGallery';
@@ -30,7 +30,7 @@ const fallbackTitles = [
 const GallerySection = () => {
   const [galleryItems, setGalleryItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeMediaIndex, setActiveMediaIndex] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -39,10 +39,10 @@ const GallerySection = () => {
         if (data && data.length > 0) {
           setGalleryItems(data);
         } else {
-          setGalleryItems(fallbackImages.map((img, i) => ({ image: img, title: fallbackTitles[i] || '' })));
+          setGalleryItems(fallbackImages.map((img, i) => ({ image: img, title: fallbackTitles[i] || '', galleryImages: [] })));
         }
       } catch (error) {
-        setGalleryItems(fallbackImages.map((img, i) => ({ image: img, title: fallbackTitles[i] || '' })));
+        setGalleryItems(fallbackImages.map((img, i) => ({ image: img, title: fallbackTitles[i] || '', galleryImages: [] })));
       } finally {
         setLoading(false);
       }
@@ -51,7 +51,6 @@ const GallerySection = () => {
   }, []);
 
   const displayItems = galleryItems.slice(0, 5);
-  const displayImages = displayItems.map((item) => item.image);
   const accordionItems = displayItems.map((item, index) => {
     const title = item.title || fallbackTitles[index] || `Finique Work 0${index + 1}`;
     return {
@@ -81,29 +80,27 @@ const GallerySection = () => {
               defaultIndex={2}
               expandRatio={0.68}
               trigger="hover"
-              onZoomClick={(index) => setActiveMediaIndex(index)}
+              onItemClick={(index) => {
+                const isMobileOrTablet = window.innerWidth < 1024;
+                if (isMobileOrTablet) return; // Prevent navigation on photo click on touchscreens
+                
+                const project = displayItems[index];
+                if (project && project._id) {
+                  navigate(`/gallery/${project._id}`);
+                }
+              }}
+              onZoomClick={(index) => {
+                const project = displayItems[index];
+                if (project && project._id) {
+                  navigate(`/gallery/${project._id}`);
+                }
+              }}
               height={480}
               accentColor="#000745"
             />
           )}
         </motion.div>
       </div>
-
-      {activeMediaIndex !== null && (
-        <MediaModal
-          mediaItem={{
-            url: displayImages[activeMediaIndex],
-            category: 'Project Gallery',
-            projectTitle: displayItems[activeMediaIndex]?.title || fallbackTitles[activeMediaIndex] || `Project 0${activeMediaIndex + 1}`,
-            index: activeMediaIndex,
-            total: displayImages.length
-          }}
-          canNavigate={true}
-          onNext={() => setActiveMediaIndex((prev) => (prev + 1) % displayImages.length)}
-          onPrev={() => setActiveMediaIndex((prev) => (prev - 1 + displayImages.length) % displayImages.length)}
-          onClose={() => setActiveMediaIndex(null)}
-        />
-      )}
     </motion.section>
   );
 };

@@ -55,6 +55,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/enquiries', enquiryRoutes);
+app.use('/api/contact', enquiryRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/gallery', galleryRoutes);

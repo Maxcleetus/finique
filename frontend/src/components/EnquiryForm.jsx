@@ -33,20 +33,30 @@ const EnquiryForm = ({ productId, title = null, className = '', onSubmitted }) =
     setSubmitting(true);
     setFeedback({ type: '', message: '' });
 
-    const submissionData = new FormData();
-    submissionData.append('name', formData.name);
-    submissionData.append('phone', formData.phone);
-    if (formData.email) submissionData.append('email', formData.email);
-    if (formData.message) submissionData.append('message', formData.message);
-    if (productId) submissionData.append('productId', productId);
-    if (file) submissionData.append('attachment', file);
-
     try {
-      await api.post('/enquiries', submissionData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      if (file) {
+        const submissionData = new FormData();
+        submissionData.append('name', formData.name);
+        submissionData.append('phone', formData.phone);
+        if (formData.email) submissionData.append('email', formData.email);
+        if (formData.message) submissionData.append('message', formData.message);
+        if (productId) submissionData.append('productId', productId);
+        submissionData.append('attachment', file);
+
+        await api.post('/contact', submissionData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+      } else {
+        await api.post('/contact', {
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email || undefined,
+          message: formData.message || undefined,
+          productId: productId || undefined
+        });
+      }
       setFeedback({ type: 'success', message: 'Message sent. We will be in touch shortly.' });
       setFormData({ name: '', phone: '', email: '', message: '' });
       setFile(null);

@@ -10,6 +10,70 @@ const navLinks = [
   { to: '/contact', label: 'Contact' }
 ];
 
+const mobileMenuVariants = {
+  hidden: {
+    opacity: 0,
+    y: '-100%',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'tween',
+      duration: 0.35,
+      ease: 'easeOut',
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: '-100%',
+    transition: {
+      type: 'tween',
+      duration: 0.3,
+      ease: 'easeIn',
+    },
+  },
+};
+
+const mobileListVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.18,
+    },
+  },
+  exit: {
+    transition: {
+      staggerChildren: 0.04,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const mobileItemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.35,
+      ease: 'easeOut',
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: 18,
+    transition: {
+      duration: 0.12,
+      ease: 'easeOut',
+    },
+  },
+};
+
 const Navbar = ({ onOpenEnquiry }) => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -24,6 +88,15 @@ const Navbar = ({ onOpenEnquiry }) => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
 
   return (
     <motion.header
@@ -88,76 +161,85 @@ const Navbar = ({ onOpenEnquiry }) => {
           </div>
         </nav>
 
-        {/* Hamburger Icon – Animated */}
+        {/* Hamburger Icon */}
         <button
           type="button"
-          className="relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white shadow-sm md:hidden transition-colors hover:bg-slate-50"
-          onClick={() => setOpen((prev) => !prev)}
-          aria-label="Toggle menu"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white/80 text-slate-700 shadow-sm transition-all duration-200 hover:border-brand-navy/30 hover:text-brand-navy hover:bg-slate-50 focus:outline-none md:hidden"
+          onClick={() => setOpen(true)}
+          aria-label="Open navigation menu"
         >
-          <motion.span
-            className="h-0.5 w-5 rounded-full bg-brand-navy origin-center"
-            animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.25 }}
-          />
-          <motion.span
-            className="h-0.5 w-5 rounded-full bg-brand-navy"
-            animate={open ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.2 }}
-          />
-          <motion.span
-            className="h-0.5 w-5 rounded-full bg-brand-navy origin-center"
-            animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.25 }}
-          />
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="border-t border-slate-100 bg-white/95 backdrop-blur-xl md:hidden overflow-hidden"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed inset-0 z-[60] flex min-h-screen flex-col overflow-y-auto bg-slate-50 px-5 py-5 text-slate-900 md:hidden"
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
-            <div className="container-shell flex flex-col gap-1 py-4 pb-6">
-              {navLinks.map((item, i) => (
-                <motion.div
-                  key={item.to}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.2 }}
-                >
-                  <Link
-                    to={item.to}
-                    className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 hover:text-brand-navy"
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                    <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </motion.div>
-              ))}
+            <div className="flex items-center justify-between">
+              <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
+                <img src="/assets/logo.png" alt="FINIQUE" className="h-10 w-auto" />
+              </Link>
+
+              <button
+                type="button"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:border-brand-navy/30 hover:bg-slate-50 hover:text-brand-navy focus:outline-none"
+                onClick={() => setOpen(false)}
+                aria-label="Close navigation menu"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <motion.nav
+              className="flex flex-1 flex-col items-center justify-center gap-3 py-10"
+              variants={mobileListVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              {navLinks.map((item) => {
+                const isActive = location.pathname === item.to;
+                return (
+                  <motion.div key={item.to} variants={mobileItemVariants}>
+                    <Link
+                      to={item.to}
+                      className={`block rounded-lg px-6 py-3 text-center text-2xl font-light transition-all duration-200 ${
+                        isActive
+                          ? 'bg-brand-navy/10 text-brand-navy font-semibold'
+                          : 'text-slate-800 hover:bg-slate-100 hover:text-brand-navy'
+                      }`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+
               <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.06 + 0.05 }}
-                className="mt-3 pt-3 border-t border-slate-100"
+                className="mt-5 w-full max-w-xs border-t border-slate-200 pt-5"
+                variants={mobileItemVariants}
               >
                 <button
                   type="button"
                   onClick={() => { setOpen(false); onOpenEnquiry(); }}
-                  className="w-full rounded-xl bg-brand-navy py-3 text-sm font-bold text-white shadow-lg shadow-violet-900/20 transition-all hover:bg-violet-950"
+                  className="w-full rounded-xl bg-brand-navy py-3 text-center text-sm font-bold text-white shadow-lg shadow-violet-900/20 transition-all hover:bg-violet-950"
                 >
                   Enquire Now
                 </button>
               </motion.div>
-            </div>
+            </motion.nav>
           </motion.div>
         )}
       </AnimatePresence>

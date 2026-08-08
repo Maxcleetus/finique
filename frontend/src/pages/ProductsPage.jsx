@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppLoader from '../components/AppLoader';
 import Seo from '../components/Seo';
@@ -88,6 +88,66 @@ const ProductsPage = () => {
 
   const categories = useMemo(() => ['All', ...new Set(products.map((item) => item.category))], [products]);
   const filteredProducts = activeCategory === 'All' ? products : products.filter((item) => item.category === activeCategory);
+
+  const filterRef = useRef(null);
+  const isDraggingRef = useRef(false);
+
+  useEffect(() => {
+    const container = filterRef.current;
+    if (!container) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    const handleMouseDown = (e) => {
+      isDown = true;
+      isDraggingRef.current = false;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+    };
+
+    const handleMouseLeave = () => {
+      isDown = false;
+    };
+
+    const handleMouseUp = () => {
+      isDown = false;
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5; // Scroll speed multiplier
+      if (Math.abs(x - startX) > 5) {
+        isDraggingRef.current = true;
+      }
+      container.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleWheel = (e) => {
+      if (e.deltaY !== 0) {
+        // Prevent default vertical scrolling when scrolling over this container
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    };
+
+    container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('mouseleave', handleMouseLeave);
+    container.addEventListener('mouseup', handleMouseUp);
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+      container.removeEventListener('mouseup', handleMouseUp);
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
   const productsSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -137,7 +197,8 @@ const ProductsPage = () => {
         <div className="container-shell">
           <div className="bg-white rounded-2xl border border-slate-200 shadow-lg px-4 py-3">
             <motion.div
-              className="flex gap-2 overflow-x-auto no-scrollbar"
+              ref={filterRef}
+              className="flex gap-2 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing select-none"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -146,7 +207,13 @@ const ProductsPage = () => {
               <button
                 key={cat}
                 type="button"
-                onClick={() => setActiveCategory(cat)}
+                onClick={(e) => {
+                  if (isDraggingRef.current) {
+                    e.preventDefault();
+                    return;
+                  }
+                  setActiveCategory(cat);
+                }}
                 className={`shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${
                   activeCategory === cat
                     ? 'bg-brand-navy text-white shadow-md shadow-violet-900/20'

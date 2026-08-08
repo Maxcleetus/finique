@@ -6,6 +6,7 @@ import { slideUp, staggerContainer, viewport } from '../../utils/motion';
 
 const FeaturedProducts = ({ featured, loading }) => {
   const featuredSliderRef = useRef(null);
+  const isHoveredRef = useRef(false);
 
   const scrollFeatured = (direction = 'right') => {
     const slider = featuredSliderRef.current;
@@ -31,8 +32,10 @@ const FeaturedProducts = ({ featured, loading }) => {
   useEffect(() => {
     if (loading || featured.length <= 1) return undefined;
     const interval = setInterval(() => {
-      scrollFeatured('right');
-    }, 6000);
+      if (!isHoveredRef.current) {
+        scrollFeatured('right');
+      }
+    }, 30000);
     return () => clearInterval(interval);
   }, [loading, featured.length]);
 
@@ -83,7 +86,15 @@ const FeaturedProducts = ({ featured, loading }) => {
       <motion.div className="mt-12 relative" variants={staggerContainer}>
         {loading && <AppLoader label="Loading product range..." className="md:col-span-2 lg:col-span-3" />}
         {!loading && (
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => {
+              isHoveredRef.current = true;
+            }}
+            onMouseLeave={() => {
+              isHoveredRef.current = false;
+            }}
+          >
             {/* Fade gradient for smooth scroll cutoff on the right */}
             <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             <div

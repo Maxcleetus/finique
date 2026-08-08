@@ -13,22 +13,22 @@ import ReviewsSection from '../components/home/ReviewsSection';
 import FaqSection from '../components/home/FaqSection';
 
 const HomePage = () => {
-  const [featured, setFeatured] = useState([]);
-  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
 
   const [reviews, setReviews] = useState([]);
   const [reviewsLoading, setReviewsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFeatured = async () => {
-      setFeaturedLoading(true);
+    const fetchProducts = async () => {
+      setProductsLoading(true);
       try {
-        const { data } = await api.get('/products/featured', { params: { view: 'card' } });
-        setFeatured(data);
+        const { data } = await api.get('/products', { params: { view: 'card' } });
+        setProducts(data);
       } catch {
-        setFeatured([]);
+        setProducts([]);
       } finally {
-        setFeaturedLoading(false);
+        setProductsLoading(false);
       }
     };
     const fetchReviews = async () => {
@@ -43,7 +43,7 @@ const HomePage = () => {
       }
     };
 
-    fetchFeatured();
+    fetchProducts();
     fetchReviews();
   }, []);
 
@@ -72,7 +72,7 @@ const HomePage = () => {
       <SocialConnectSection />
       <ReviewsSection reviews={reviews} loading={reviewsLoading} />
       <GallerySection />
-      <FeaturedProducts featured={featured} loading={featuredLoading} />
+      <FeaturedProducts featured={products} loading={productsLoading} />
       <FaqSection />
     </main>
   );

@@ -7,8 +7,7 @@ import { buildCanonicalUrl, siteConfig } from '../utils/siteSeo';
 const stats = [
   { value: '28+', label: 'Years of Excellence' },
   { value: '1100+', label: 'Projects Delivered' },
-  { value: '100%', label: 'Quality Certified' },
-  { value: '24/7', label: 'Customer Support' }
+  { value: '15,000+', label: 'Windows Fitted' }
 ];
 
 const processSteps = [
@@ -101,7 +100,7 @@ const AboutPage = () => {
           {/* Stats Row */}
           <motion.div
             variants={staggerContainer}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10"
+            className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10"
           >
             {stats.map((stat) => (
               <motion.div

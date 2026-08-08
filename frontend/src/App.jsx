@@ -18,41 +18,16 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 
 const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
 
-const MIN_PRELOADER_MS = 2000;
 const MAINTENANCE_MODE = import.meta.env.VITE_MAINTENANCE_MODE !== 'false';
 
 const MainWebsite = () => {
   const [showPreloader, setShowPreloader] = useState(true);
 
-  useEffect(() => {
-    const preloaderStart = Date.now();
-    let hasCompleted = false;
-    let hideTimer = null;
-
-    const completePreloader = () => {
-      if (hasCompleted) return;
-      hasCompleted = true;
-
-      const elapsed = Date.now() - preloaderStart;
-      const remaining = Math.max(0, MIN_PRELOADER_MS - elapsed);
-      hideTimer = setTimeout(() => {
-        setShowPreloader(false);
-        window.__finiquePreloaderCompleteAt = Date.now();
-        window.dispatchEvent(new CustomEvent('finique:preloader-complete'));
-      }, remaining);
-    };
-
-    if (document.readyState === 'complete') {
-      completePreloader();
-    } else {
-      window.addEventListener('load', completePreloader, { once: true });
-    }
-
-    return () => {
-      if (hideTimer) clearTimeout(hideTimer);
-      window.removeEventListener('load', completePreloader);
-    };
-  }, []);
+  const handlePreloaderComplete = () => {
+    setShowPreloader(false);
+    window.__finiquePreloaderCompleteAt = Date.now();
+    window.dispatchEvent(new CustomEvent('finique:preloader-complete'));
+  };
 
   useEffect(() => {
     if (showPreloader) return;
@@ -87,7 +62,7 @@ const MainWebsite = () => {
   return (
     <>
       <ScrollToTop />
-      <WebsitePreloader isVisible={showPreloader} />
+      <WebsitePreloader isVisible={showPreloader} onComplete={handlePreloaderComplete} />
       <Suspense
         fallback={
           <div className="flex min-h-screen items-center justify-center bg-brand-slate py-14">

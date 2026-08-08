@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const WebsitePreloader = ({ isVisible }) => {
+const WebsitePreloader = ({ isVisible, onComplete }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
@@ -8,6 +8,7 @@ const WebsitePreloader = ({ isVisible }) => {
 
     const imageUrls = [0, 1, 2, 3, 4, 5, 6].map(idx => `/assets/logo_letter_${idx}.png`);
     let loadedCount = 0;
+    let timer = null;
 
     const handleImageLoad = () => {
       loadedCount++;
@@ -16,6 +17,12 @@ const WebsitePreloader = ({ isVisible }) => {
         setTimeout(() => {
           setImagesLoaded(true);
         }, 50);
+
+        // Wave animation finishes at 2.32s (0.72s stagger + 1.6s duration)
+        // Wait 2.32s + 2.0s static pause = 4.32 seconds (4320ms)
+        timer = setTimeout(() => {
+          if (onComplete) onComplete();
+        }, 4320);
       }
     };
 
@@ -29,7 +36,11 @@ const WebsitePreloader = ({ isVisible }) => {
         img.onerror = handleImageLoad; // Avoid hanging if an asset fails to load
       }
     });
-  }, [isVisible]);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [isVisible, onComplete]);
 
   if (!isVisible) return null;
 

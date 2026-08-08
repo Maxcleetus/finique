@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import AppLoader from './components/AppLoader';
 import ScrollToTop from './components/ScrollToTop';
 import WebsitePreloader from './components/WebsitePreloader';
@@ -62,7 +63,11 @@ const MainWebsite = () => {
   return (
     <>
       <ScrollToTop />
-      <WebsitePreloader isVisible={showPreloader} onComplete={handlePreloaderComplete} />
+      <AnimatePresence>
+        {showPreloader && (
+          <WebsitePreloader onComplete={handlePreloaderComplete} />
+        )}
+      </AnimatePresence>
       <Suspense
         fallback={
           <div className="flex min-h-screen items-center justify-center bg-brand-slate py-14">

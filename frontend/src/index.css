@@ -114,6 +114,9 @@ body {
 
 .preloader-letter {
   display: inline-block;
+}
+
+.preloader-letter.animating {
   animation: preloader-letter-wave 1.6s ease-in-out forwards;
 }
 

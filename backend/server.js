@@ -47,6 +47,10 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Welcome to Finique Backend API' });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });

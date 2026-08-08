@@ -14,12 +14,11 @@ const sendEnquiryEmail = async (enquiry, productTitle = null) => {
   const resend = new Resend(apiKey);
   const { name, phone, email, message, attachment } = enquiry;
 
-  try {
-    await resend.emails.send({
-      from: 'Finique Enquiries <info@finiquewindows.com>',
-      to: 'sales@finiquewindows.com',
-      subject: `New Enquiry from ${name}`,
-      html: `
+  const emailPayload = {
+    from: 'Finique Enquiries <info@finiquewindows.com>',
+    to: 'sales@finiquewindows.com',
+    subject: `New Enquiry from ${name}`,
+    html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1a1f2f; max-width: 600px; margin: 0 auto; border: 1px solid #d9dee8; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
           <div style="background-color: #000745; padding: 24px; text-align: center; color: #ffffff;">
             <h2 style="margin: 0; font-size: 20px; font-weight: bold; tracking: 1px;">NEW ENQUIRY RECEIVED</h2>
@@ -73,8 +72,25 @@ const sendEnquiryEmail = async (enquiry, productTitle = null) => {
           </div>
         </div>
       `
-    });
-    console.log('[Resend] Success: Email notification sent to sales@finiquewindows.com');
+  };
+
+  try {
+    const response = await resend.emails.send(emailPayload);
+    if (response.error) {
+      console.error('[Resend] Admin Email Error:', response.error);
+      console.log('[Resend] Retrying admin email sending with onboarding@resend.dev fallback...');
+      const retryResponse = await resend.emails.send({
+        ...emailPayload,
+        from: 'Finique Enquiries <onboarding@resend.dev>'
+      });
+      if (retryResponse.error) {
+        console.error('[Resend] Fallback Admin Email Error:', retryResponse.error);
+      } else {
+        console.log('[Resend] Fallback Admin Email Success:', retryResponse.data);
+      }
+    } else {
+      console.log('[Resend] Success: Email notification sent to sales@finiquewindows.com');
+    }
   } catch (error) {
     console.error('[Resend] Error sending email:', error.message);
   }
@@ -89,12 +105,11 @@ const sendClientThankYouEmail = async (enquiry, productTitle = null) => {
 
   const resend = new Resend(apiKey);
 
-  try {
-    await resend.emails.send({
-      from: 'Finique <info@finiquewindows.com>',
-      to: email,
-      subject: `Thank you for contacting Finique, ${name}`,
-      html: `
+  const emailPayload = {
+    from: 'Finique <info@finiquewindows.com>',
+    to: email,
+    subject: `Thank you for contacting Finique, ${name}`,
+    html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #1a1f2f; max-width: 600px; margin: 0 auto; border: 1px solid #d9dee8; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
           <div style="background-color: #000745; padding: 24px; text-align: center; color: #ffffff;">
             <h2 style="margin: 0; font-size: 20px; font-weight: bold; tracking: 1.5px;">THANK YOU FOR GETTING IN TOUCH</h2>
@@ -123,8 +138,25 @@ const sendClientThankYouEmail = async (enquiry, productTitle = null) => {
           </div>
         </div>
       `
-    });
-    console.log(`[Resend] Success: Thank-you email sent to client at ${email}`);
+  };
+
+  try {
+    const response = await resend.emails.send(emailPayload);
+    if (response.error) {
+      console.error(`[Resend] Client Thank-You Email Error for ${email}:`, response.error);
+      console.log(`[Resend] Retrying client email sending to ${email} with onboarding@resend.dev fallback...`);
+      const retryResponse = await resend.emails.send({
+        ...emailPayload,
+        from: 'Finique <onboarding@resend.dev>'
+      });
+      if (retryResponse.error) {
+        console.error(`[Resend] Fallback Client Thank-You Email Error for ${email}:`, retryResponse.error);
+      } else {
+        console.log(`[Resend] Fallback Client Thank-You Email Success for ${email}:`, retryResponse.data);
+      }
+    } else {
+      console.log(`[Resend] Success: Thank-you email sent to client at ${email}`);
+    }
   } catch (error) {
     console.error(`[Resend] Error sending thank-you email to ${email}:`, error.message);
   }

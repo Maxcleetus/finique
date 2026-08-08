@@ -81,7 +81,7 @@ const sendEnquiryEmail = async (enquiry, productTitle = null) => {
       console.log('[Resend] Retrying admin email sending with onboarding@resend.dev fallback...');
       const retryResponse = await resend.emails.send({
         ...emailPayload,
-        from: 'Finique Enquiries <onboarding@resend.dev>'
+        from: 'Finique Enquiries <info@finiquewindows.com>'
       });
       if (retryResponse.error) {
         console.error('[Resend] Fallback Admin Email Error:', retryResponse.error);
@@ -147,7 +147,7 @@ const sendClientThankYouEmail = async (enquiry, productTitle = null) => {
       console.log(`[Resend] Retrying client email sending to ${email} with onboarding@resend.dev fallback...`);
       const retryResponse = await resend.emails.send({
         ...emailPayload,
-        from: 'Finique <onboarding@resend.dev>'
+        from: 'Finique <info@finiquewindows.com>'
       });
       if (retryResponse.error) {
         console.error(`[Resend] Fallback Client Thank-You Email Error for ${email}:`, retryResponse.error);

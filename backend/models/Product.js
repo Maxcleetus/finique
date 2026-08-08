@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema(
     description: { type: String, required: true },
     specifications: { type: mongoose.Schema.Types.Mixed, default: {} },
     images: [{ type: String }],
-    videoUrl: { type: String, default: '' }
+    videoUrl: { type: String, default: '' },
+    sortOrder: { type: Number, default: 0 }
   },
   { timestamps: true }
 );

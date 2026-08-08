@@ -27,6 +27,35 @@ const AdminProductsPage = () => {
   const [status, setStatus] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [reorderMode, setReorderMode] = useState(false);
+  const [orderedProducts, setOrderedProducts] = useState([]);
+
+  const startReorder = () => {
+    setOrderedProducts([...products]);
+    setReorderMode(true);
+  };
+
+  const moveProduct = (index, direction) => {
+    const newOrder = [...orderedProducts];
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= newOrder.length) return;
+    const temp = newOrder[index];
+    newOrder[index] = newOrder[targetIndex];
+    newOrder[targetIndex] = temp;
+    setOrderedProducts(newOrder);
+  };
+
+  const saveOrder = async () => {
+    try {
+      const order = orderedProducts.map((p) => p._id);
+      await api.put('/products/reorder', { order });
+      setStatus('Product order updated successfully.');
+      setReorderMode(false);
+      fetchProducts();
+    } catch (error) {
+      setStatus(error.response?.data?.message || 'Failed to update order');
+    }
+  };
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -133,149 +162,218 @@ const AdminProductsPage = () => {
 
   return (
     <section className="space-y-6">
-      <h1 className="text-2xl font-bold text-brand-navy">Manage Products</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-brand-navy">Manage Products</h1>
+        {!reorderMode && products.length > 1 && (
+          <button
+            onClick={startReorder}
+            className="rounded-md border border-brand-border px-4 py-2 text-sm font-semibold text-brand-navy hover:bg-slate-50 transition-all"
+          >
+            Arrange Order
+          </button>
+        )}
+      </div>
 
-      <form onSubmit={handleSubmit} className="card space-y-4">
-        <h2 className="text-lg font-bold text-brand-navy">{editingId ? 'Edit Product' : 'Add Product'}</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          <input
-            placeholder="Title"
-            value={form.title}
-            onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
-            required
-            className="rounded-md border border-brand-border px-3 py-2 text-sm"
-          />
-          <input
-            placeholder="Category"
-            value={form.category}
-            onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
-            required
-            className="rounded-md border border-brand-border px-3 py-2 text-sm"
-          />
-        </div>
-        <textarea
-          placeholder="Description"
-          value={form.description}
-          onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
-          required
-          rows="4"
-          className="w-full rounded-md border border-brand-border px-3 py-2 text-sm"
-        />
-        <div className="space-y-3 rounded-md border border-brand-border p-3">
-          <p className="text-sm font-semibold text-brand-navy">Technical Specifications</p>
-          {specifications.map((item, index) => (
-            <div key={`${index}-${item.key}`} className="grid gap-2 md:grid-cols-[1fr,1fr,auto]">
-              <input
-                placeholder="Field (e.g. Profile)"
-                value={item.key}
-                onChange={(e) => updateSpecification(index, 'key', e.target.value)}
-                className="rounded-md border border-brand-border px-3 py-2 text-sm"
-              />
-              <input
-                placeholder="Value (e.g. uPVC)"
-                value={item.value}
-                onChange={(e) => updateSpecification(index, 'value', e.target.value)}
-                className="rounded-md border border-brand-border px-3 py-2 text-sm"
-              />
+      {reorderMode ? (
+        <div className="card space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-brand-navy">Arrange Product Order</h2>
+            <div className="flex gap-2">
               <button
-                type="button"
-                onClick={() => removeSpecificationRow(index)}
-                className="rounded-md border border-red-300 px-3 py-2 text-xs font-semibold text-red-700"
+                onClick={saveOrder}
+                className="rounded-md bg-brand-navy px-4 py-2 text-sm font-semibold text-white hover:bg-opacity-90 transition-all"
               >
-                Remove
+                Save Order
+              </button>
+              <button
+                onClick={() => setReorderMode(false)}
+                className="rounded-md border border-brand-border px-4 py-2 text-sm font-semibold text-brand-navy hover:bg-slate-50 transition-all"
+              >
+                Cancel
               </button>
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={addSpecificationRow}
-            className="rounded-md border border-brand-border px-3 py-2 text-xs font-semibold text-brand-navy"
-          >
-            Add Specification
-          </button>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2">
-          <input type="file" multiple accept="image/*" onChange={(e) => setImages(e.target.files)} className="text-sm" />
-          <input type="file" accept="video/*" onChange={(e) => setVideo(e.target.files?.[0] || null)} className="text-sm" />
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <button type="submit" className="rounded-md bg-brand-navy px-4 py-2 text-sm font-semibold text-white">
-            {editingId ? 'Update Product' : 'Save Product'}
-          </button>
-          {editingId && (
-            <button
-              type="button"
-              onClick={resetForm}
-              className="rounded-md border border-brand-border px-4 py-2 text-sm font-semibold text-brand-navy"
-            >
-              Cancel Edit
-            </button>
-          )}
-        </div>
-        {status && <p className="text-sm text-slate-600">{status}</p>}
-      </form>
-
-      <div className="space-y-4">
-        {loading && <p className="text-sm text-slate-500">Loading products...</p>}
-        {products.map((item) => (
-          <article key={item._id} className="card space-y-4">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <h3 className="text-base font-bold text-brand-navy">{item.title}</h3>
-                <p className="text-xs uppercase tracking-wide text-slate-500">{item.category}</p>
+          </div>
+          <p className="text-xs text-slate-500">Use the Up and Down arrows to arrange how products appear on the website.</p>
+          <div className="divide-y divide-brand-border border border-brand-border rounded-md overflow-hidden">
+            {orderedProducts.map((item, index) => (
+              <div key={item._id} className="flex items-center justify-between p-3 bg-white hover:bg-slate-50 transition-colors">
+                <div className="flex items-center gap-3">
+                  {item.images?.length > 0 && (
+                    <img src={item.images[0]} alt={item.title} className="h-10 w-10 rounded object-cover border border-brand-border" />
+                  )}
+                  <div>
+                    <p className="text-sm font-semibold text-brand-navy">{item.title}</p>
+                    <p className="text-xs text-slate-500 uppercase">{item.category}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    disabled={index === 0}
+                    onClick={() => moveProduct(index, -1)}
+                    className="p-2 border border-brand-border rounded hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
+                    title="Move Up"
+                  >
+                    ▲
+                  </button>
+                  <button
+                    disabled={index === orderedProducts.length - 1}
+                    onClick={() => moveProduct(index, 1)}
+                    className="p-2 border border-brand-border rounded hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
+                    title="Move Down"
+                  >
+                    ▼
+                  </button>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => startEdit(item)}
-                  className="rounded border border-brand-border px-3 py-1 text-xs font-semibold text-brand-navy"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDelete(item._id)}
-                  className="rounded border border-red-300 px-3 py-1 text-xs font-semibold text-red-700"
-                >
-                  Delete
-                </button>
-              </div>
+            ))}
+          </div>
+          {status && <p className="text-sm text-slate-600">{status}</p>}
+        </div>
+      ) : (
+        <>
+          <form onSubmit={handleSubmit} className="card space-y-4">
+            <h2 className="text-lg font-bold text-brand-navy">{editingId ? 'Edit Product' : 'Add Product'}</h2>
+            <div className="grid gap-4 md:grid-cols-2">
+              <input
+                placeholder="Title"
+                value={form.title}
+                onChange={(e) => setForm((prev) => ({ ...prev, title: e.target.value }))}
+                required
+                className="rounded-md border border-brand-border px-3 py-2 text-sm"
+              />
+              <input
+                placeholder="Category"
+                value={form.category}
+                onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+                required
+                className="rounded-md border border-brand-border px-3 py-2 text-sm"
+              />
             </div>
+            <textarea
+              placeholder="Description"
+              value={form.description}
+              onChange={(e) => setForm((prev) => ({ ...prev, description: e.target.value }))}
+              required
+              rows="4"
+              className="w-full rounded-md border border-brand-border px-3 py-2 text-sm"
+            />
+            <div className="space-y-3 rounded-md border border-brand-border p-3">
+              <p className="text-sm font-semibold text-brand-navy">Technical Specifications</p>
+              {specifications.map((item, index) => (
+                <div key={`${index}-${item.key}`} className="grid gap-2 md:grid-cols-[1fr,1fr,auto]">
+                  <input
+                    placeholder="Field (e.g. Profile)"
+                    value={item.key}
+                    onChange={(e) => updateSpecification(index, 'key', e.target.value)}
+                    className="rounded-md border border-brand-border px-3 py-2 text-sm"
+                  />
+                  <input
+                    placeholder="Value (e.g. uPVC)"
+                    value={item.value}
+                    onChange={(e) => updateSpecification(index, 'value', e.target.value)}
+                    className="rounded-md border border-brand-border px-3 py-2 text-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeSpecificationRow(index)}
+                    className="rounded-md border border-red-300 px-3 py-2 text-xs font-semibold text-red-700"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={addSpecificationRow}
+                className="rounded-md border border-brand-border px-3 py-2 text-xs font-semibold text-brand-navy"
+              >
+                Add Specification
+              </button>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <input type="file" multiple accept="image/*" onChange={(e) => setImages(e.target.files)} className="text-sm" />
+              <input type="file" accept="video/*" onChange={(e) => setVideo(e.target.files?.[0] || null)} className="text-sm" />
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <button type="submit" className="rounded-md bg-brand-navy px-4 py-2 text-sm font-semibold text-white">
+                {editingId ? 'Update Product' : 'Save Product'}
+              </button>
+              {editingId && (
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="rounded-md border border-brand-border px-4 py-2 text-sm font-semibold text-brand-navy"
+                >
+                  Cancel Edit
+                </button>
+              )}
+            </div>
+            {status && <p className="text-sm text-slate-600">{status}</p>}
+          </form>
 
-            {item.images?.length > 0 && (
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
-                {item.images.map((url) => (
-                  <div key={url} className="rounded-md border border-brand-border p-2">
-                    <img src={url} alt={item.title} className="h-24 w-full rounded object-cover" loading="lazy" />
+          <div className="space-y-4">
+            {loading && <p className="text-sm text-slate-500">Loading products...</p>}
+            {products.map((item) => (
+              <article key={item._id} className="card space-y-4">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-base font-bold text-brand-navy">{item.title}</h3>
+                    <p className="text-xs uppercase tracking-wide text-slate-500">{item.category}</p>
+                  </div>
+                  <div className="flex gap-2">
                     <button
                       type="button"
-                      onClick={() => removeMedia(item._id, url)}
-                      className="mt-2 w-full rounded border border-red-300 px-2 py-1 text-xs font-semibold text-red-700"
+                      onClick={() => startEdit(item)}
+                      className="rounded border border-brand-border px-3 py-1 text-xs font-semibold text-brand-navy"
                     >
-                      Remove
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(item._id)}
+                      className="rounded border border-red-300 px-3 py-1 text-xs font-semibold text-red-700"
+                    >
+                      Delete
                     </button>
                   </div>
-                ))}
-              </div>
-            )}
+                </div>
 
-            {item.videoUrl && (
-              <div className="max-w-md rounded-md border border-brand-border p-2">
-                <video controls className="h-40 w-full rounded bg-black object-cover">
-                  <source src={item.videoUrl} />
-                </video>
-                <button
-                  type="button"
-                  onClick={() => removeMedia(item._id, item.videoUrl)}
-                  className="mt-2 w-full rounded border border-red-300 px-2 py-1 text-xs font-semibold text-red-700"
-                >
-                  Remove Video
-                </button>
-              </div>
-            )}
-          </article>
-        ))}
-      </div>
+                {item.images?.length > 0 && (
+                  <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">
+                    {item.images.map((url) => (
+                      <div key={url} className="rounded-md border border-brand-border p-2">
+                        <img src={url} alt={item.title} className="h-24 w-full rounded object-cover" loading="lazy" />
+                        <button
+                          type="button"
+                          onClick={() => removeMedia(item._id, url)}
+                          className="mt-2 w-full rounded border border-red-300 px-2 py-1 text-xs font-semibold text-red-700"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {item.videoUrl && (
+                  <div className="max-w-md rounded-md border border-brand-border p-2">
+                    <video controls className="h-40 w-full rounded bg-black object-cover">
+                      <source src={item.videoUrl} />
+                    </video>
+                    <button
+                      type="button"
+                      onClick={() => removeMedia(item._id, item.videoUrl)}
+                      className="mt-2 w-full rounded border border-red-300 px-2 py-1 text-xs font-semibold text-red-700"
+                    >
+                      Remove Video
+                    </button>
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 };

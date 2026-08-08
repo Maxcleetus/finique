@@ -9,13 +9,13 @@ const parseBoolean = (value) => {
 };
 
 export const getReviews = asyncHandler(async (req, res) => {
-  const reviews = await Review.find({ isPublished: true }).sort({ createdAt: -1 }).lean();
+  const reviews = await Review.find({ isPublished: true }).sort({ sortOrder: 1, createdAt: -1 }).lean();
   res.set('Cache-Control', 'public, max-age=300');
   res.json(reviews);
 });
 
 export const getAdminReviews = asyncHandler(async (req, res) => {
-  const reviews = await Review.find().sort({ createdAt: -1 });
+  const reviews = await Review.find().sort({ sortOrder: 1, createdAt: -1 });
   res.json(reviews);
 });
 
@@ -113,4 +113,22 @@ export const deleteReviewImage = asyncHandler(async (req, res) => {
   }
 
   res.json({ message: 'Review image removed successfully', review });
+});
+
+export const reorderReviews = asyncHandler(async (req, res) => {
+  const { order } = req.body;
+  if (!Array.isArray(order)) {
+    res.status(400);
+    throw new Error('Order array of IDs is required');
+  }
+
+  const bulkOps = order.map((id, index) => ({
+    updateOne: {
+      filter: { _id: id },
+      update: { $set: { sortOrder: index } }
+    }
+  }));
+
+  await Review.bulkWrite(bulkOps);
+  res.json({ message: 'Reviews reordered successfully' });
 });

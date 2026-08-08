@@ -46,7 +46,7 @@ const uploadVideoSafe = async (videoFile) => {
 export const getProducts = asyncHandler(async (req, res) => {
   const { category, view } = req.query;
   const filter = category ? { category } : {};
-  const query = Product.find(filter).sort({ createdAt: -1 });
+  const query = Product.find(filter).sort({ sortOrder: 1, createdAt: -1 });
 
   if (view === 'card') {
     query.select('title slug category description images');
@@ -61,7 +61,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 export const getFeaturedProducts = asyncHandler(async (req, res) => {
   const products = await Product.find()
     .select('title slug category description images')
-    .sort({ createdAt: -1 })
+    .sort({ sortOrder: 1, createdAt: -1 })
     .limit(3)
     .lean();
   res.set('Cache-Control', 'public, max-age=180');
@@ -220,4 +220,22 @@ export const deleteProductMedia = asyncHandler(async (req, res) => {
 
   await product.save();
   res.json({ message: 'Media removed successfully', product });
+});
+
+export const reorderProducts = asyncHandler(async (req, res) => {
+  const { order } = req.body;
+  if (!Array.isArray(order)) {
+    res.status(400);
+    throw new Error('Order array of IDs is required');
+  }
+
+  const bulkOps = order.map((id, index) => ({
+    updateOne: {
+      filter: { _id: id },
+      update: { $set: { sortOrder: index } }
+    }
+  }));
+
+  await Product.bulkWrite(bulkOps);
+  res.json({ message: 'Products reordered successfully' });
 });

@@ -6,7 +6,8 @@ import {
   getFeaturedProducts,
   getProductBySlug,
   getProducts,
-  updateProduct
+  updateProduct,
+  reorderProducts
 } from '../controllers/productController.js';
 import { protectAdmin } from '../middleware/authMiddleware.js';
 import { upload } from '../middleware/uploadMiddleware.js';
@@ -16,6 +17,8 @@ const router = express.Router();
 router.get('/', getProducts);
 router.get('/featured', getFeaturedProducts);
 router.get('/:slug', getProductBySlug);
+
+router.put('/reorder', protectAdmin, reorderProducts);
 
 router.post(
   '/',

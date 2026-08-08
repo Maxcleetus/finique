@@ -96,7 +96,7 @@ const HeroSection = () => {
         className="absolute inset-0 z-10 bg-gradient-to-t from-[#000745]/95 via-[#000745]/75 to-[#000745]/30 sm:bg-gradient-to-r sm:from-[#000745] sm:via-[#000745]/65 sm:to-transparent pointer-events-none"
         aria-hidden="true"
       />
-      {/* Subtle aesthetic overlay to enrich the colors */}
+      {/* Subtle aesthetic overlay to enrich the color */}
       <div
         className="absolute inset-0 z-[11] bg-gradient-to-bl from-transparent via-violet-900/10 to-transparent pointer-events-none mix-blend-overlay"
         aria-hidden="true"

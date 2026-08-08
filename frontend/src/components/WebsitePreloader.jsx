@@ -39,10 +39,10 @@ const WebsitePreloader = ({ onComplete }) => {
       setAnimate(true);
 
       // Wave animation finishes at 2.32s (0.72s stagger + 1.6s duration)
-      // Wait 2.32s + 2.0s static pause = 4.32 seconds (4320ms)
+      // Wait 2.32s + 1.0s static pause = 3.32 seconds (3320ms)
       completeTimer = setTimeout(() => {
         if (onComplete) onComplete();
-      }, 4320);
+      }, 3320);
     }, 150);
 
     return () => {

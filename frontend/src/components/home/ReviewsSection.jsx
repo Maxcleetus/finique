@@ -34,32 +34,23 @@ const ReviewsSection = ({ reviews, loading }) => {
     setActiveIdx(idx);
   };
 
-  // 3D Cylinder / Book Flip Transition Variants
+  // Fade In / Fade Out Transition Variants
   const cardVariants = {
     initial: {
-      rotateY: 85,
-      opacity: 0,
-      scale: 0.96,
-      transformPerspective: 1200
+      opacity: 0
     },
     animate: {
-      rotateY: 0,
       opacity: 1,
-      scale: 1,
-      transformPerspective: 1200,
       transition: {
-        duration: 0.6,
-        ease: [0.25, 1, 0.5, 1]
+        duration: 0.5,
+        ease: 'easeInOut'
       }
     },
     exit: {
-      rotateY: -85,
       opacity: 0,
-      scale: 0.96,
-      transformPerspective: 1200,
       transition: {
-        duration: 0.45,
-        ease: [0.25, 1, 0.5, 1]
+        duration: 0.4,
+        ease: 'easeInOut'
       }
     }
   };
@@ -113,11 +104,14 @@ const ReviewsSection = ({ reviews, loading }) => {
                       key={activeIdx}
                       src={reviews[activeIdx].imageUrl}
                       alt={reviews[activeIdx].name}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.02 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
                       transition={{ duration: 0.4, ease: 'easeInOut' }}
                       className="absolute inset-0 w-full h-full object-cover"
+                      style={{
+                        objectPosition: reviews[activeIdx]?.name?.toLowerCase().includes('benny') ? 'center 30%' : 'center'
+                      }}
                     />
                   ) : (
                     <motion.div
@@ -137,9 +131,17 @@ const ReviewsSection = ({ reviews, loading }) => {
                 
                 {/* Clean, minimalist text overlay */}
                 <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                  {/* 1st option: Name */}
                   <p className="font-gilroy font-bold text-white text-xs sm:text-sm tracking-wide drop-shadow-sm">
                     {reviews[activeIdx]?.name}
                   </p>
+                  {/* 2nd option: Designation */}
+                  {reviews[activeIdx]?.designation && (
+                    <p className="text-[9px] sm:text-[10px] uppercase tracking-widest mt-1 font-bold text-white drop-shadow-sm">
+                      {reviews[activeIdx]?.designation}
+                    </p>
+                  )}
+                  {/* 3rd option: Location */}
                   {reviews[activeIdx]?.location && (
                     <p className="text-[8px] sm:text-[9px] uppercase tracking-widest mt-0.5 font-bold text-white/80 drop-shadow-sm">
                       {reviews[activeIdx]?.location}
@@ -166,33 +168,35 @@ const ReviewsSection = ({ reviews, loading }) => {
                       className="w-full bg-white rounded-3xl border border-slate-100 shadow-panel p-6 sm:p-10 flex flex-col justify-between min-h-[260px] select-none cursor-pointer hover:border-slate-200 transition-colors duration-300 text-left"
                       whileHover={{ y: -4, scale: 1.01 }}
                     >
-                      <div>
-                        {/* Rating and quote decoration */}
-                        <div className="flex justify-between items-start mb-6">
-                          <div className="flex gap-1 text-amber-400">
-                            {[...Array(5)].map((_, i) => (
-                              <svg
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < reviews[activeIdx].rating
-                                    ? 'fill-current'
-                                    : 'text-slate-200 fill-current'
-                                }`}
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                              </svg>
-                            ))}
-                          </div>
+                      <div className="flex flex-col flex-1">
+                        {/* Quote decoration */}
+                        <div className="flex justify-end items-start mb-4">
                           <svg className="w-8 h-8 text-slate-100 fill-current" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                           </svg>
                         </div>
 
                         {/* Testimonial Quote */}
-                        <p className="text-[14px] sm:text-[16px] leading-relaxed text-slate-600 italic font-medium">
+                        <p className="text-[14px] sm:text-[16px] leading-relaxed text-slate-600 italic font-medium mb-4 flex-1">
                           "{reviews[activeIdx].text}"
                         </p>
+
+                        {/* Rating stars */}
+                        <div className="flex gap-1 text-amber-400 mt-auto mb-2">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < reviews[activeIdx].rating
+                                  ? 'fill-current'
+                                  : 'text-slate-200 fill-current'
+                              }`}
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
                       </div>
                       
                       {/* Interactive Hint */}
@@ -251,6 +255,9 @@ const ReviewsSection = ({ reviews, loading }) => {
                           src={reviews[activeIdx].imageUrl}
                           alt={reviews[activeIdx].name}
                           className="absolute inset-0 w-full h-full object-cover"
+                          style={{
+                            objectPosition: reviews[activeIdx]?.name?.toLowerCase().includes('benny') ? 'center 30%' : 'center'
+                          }}
                         />
                       ) : (
                         <div className="absolute inset-0 w-full h-full bg-brand-navy/5 flex items-center justify-center text-brand-navy font-bold text-3xl">
@@ -262,9 +269,17 @@ const ReviewsSection = ({ reviews, loading }) => {
                       
                       {/* Clean, minimalist text overlay */}
                       <div className="absolute bottom-4 left-4 right-4 text-left pointer-events-none">
+                        {/* 1st option: Name */}
                         <p className="font-gilroy font-bold text-white text-xs sm:text-sm tracking-wide drop-shadow-sm">
                           {reviews[activeIdx]?.name}
                         </p>
+                        {/* 2nd option: Designation */}
+                        {reviews[activeIdx]?.designation && (
+                          <p className="text-[9px] sm:text-[10px] uppercase tracking-widest mt-1 font-bold text-white drop-shadow-sm">
+                            {reviews[activeIdx]?.designation}
+                          </p>
+                        )}
+                        {/* 3rd option: Location */}
                         {reviews[activeIdx]?.location && (
                           <p className="text-[8px] sm:text-[9px] uppercase tracking-widest mt-0.5 font-bold text-white/80 drop-shadow-sm">
                             {reviews[activeIdx]?.location}

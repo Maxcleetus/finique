@@ -10,7 +10,11 @@ const parseBoolean = (value) => {
 
 export const getReviews = asyncHandler(async (req, res) => {
   const reviews = await Review.find({ isPublished: true }).sort({ sortOrder: 1, createdAt: -1 }).lean();
-  res.set('Cache-Control', 'public, max-age=300');
+  if (process.env.NODE_ENV === 'production') {
+    res.set('Cache-Control', 'public, max-age=300');
+  } else {
+    res.set('Cache-Control', 'no-store');
+  }
   res.json(reviews);
 });
 
@@ -20,7 +24,7 @@ export const getAdminReviews = asyncHandler(async (req, res) => {
 });
 
 export const createReview = asyncHandler(async (req, res) => {
-  const { name, location = '', rating, text, isPublished } = req.body;
+  const { name, location = '', designation = '', rating, text, isPublished } = req.body;
 
   if (!name || !text || rating === undefined) {
     res.status(400);
@@ -42,6 +46,7 @@ export const createReview = asyncHandler(async (req, res) => {
   const review = await Review.create({
     name,
     location,
+    designation,
     rating: numericRating,
     text,
     imageUrl,
@@ -58,10 +63,11 @@ export const updateReview = asyncHandler(async (req, res) => {
     throw new Error('Review not found');
   }
 
-  const { name, location, rating, text, isPublished } = req.body;
+  const { name, location, designation, rating, text, isPublished } = req.body;
 
   if (name !== undefined) review.name = name;
   if (location !== undefined) review.location = location;
+  if (designation !== undefined) review.designation = designation;
   if (text !== undefined) review.text = text;
   if (isPublished !== undefined) review.isPublished = parseBoolean(isPublished);
   if (req.file) {

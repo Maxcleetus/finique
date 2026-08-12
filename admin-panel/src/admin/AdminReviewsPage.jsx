@@ -4,6 +4,7 @@ import api from '../services/api';
 const baseForm = {
   name: '',
   location: '',
+  designation: '',
   rating: 5,
   text: '',
   imageUrl: '',
@@ -89,6 +90,7 @@ const AdminReviewsPage = () => {
     setForm({
       name: review.name || '',
       location: review.location || '',
+      designation: review.designation || '',
       rating: Number(review.rating) || 5,
       text: review.text || '',
       imageUrl: review.imageUrl || '',
@@ -105,6 +107,7 @@ const AdminReviewsPage = () => {
     const payload = new FormData();
     payload.append('name', form.name);
     payload.append('location', form.location);
+    payload.append('designation', form.designation);
     payload.append('rating', String(form.rating));
     payload.append('text', form.text);
     payload.append('isPublished', String(form.isPublished));
@@ -189,7 +192,9 @@ const AdminReviewsPage = () => {
                   )}
                   <div>
                     <p className="text-sm font-semibold text-brand-navy">{review.name}</p>
-                    <p className="text-xs text-slate-500">{review.location || 'Location not set'}</p>
+                    <p className="text-xs text-slate-500">
+                      {[review.designation, review.location].filter(Boolean).join(' | ') || 'No details set'}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -219,7 +224,7 @@ const AdminReviewsPage = () => {
         <>
           <form onSubmit={handleSubmit} className="card space-y-4">
             <h2 className="text-lg font-bold text-brand-navy">{editingId ? 'Edit Review' : 'Add Review'}</h2>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-3">
               <input
                 placeholder="Client name"
                 value={form.name}
@@ -228,7 +233,13 @@ const AdminReviewsPage = () => {
                 className="rounded-md border border-brand-border px-3 py-2 text-sm"
               />
               <input
-                placeholder="Location"
+                placeholder="Designation (e.g. Home Owner, Project Manager)"
+                value={form.designation}
+                onChange={(e) => setForm((prev) => ({ ...prev, designation: e.target.value }))}
+                className="rounded-md border border-brand-border px-3 py-2 text-sm"
+              />
+              <input
+                placeholder="Location (e.g. Thrissur, Kochi)"
                 value={form.location}
                 onChange={(e) => setForm((prev) => ({ ...prev, location: e.target.value }))}
                 className="rounded-md border border-brand-border px-3 py-2 text-sm"
@@ -310,6 +321,7 @@ const AdminReviewsPage = () => {
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <p className="text-base font-bold text-brand-navy">{review.name}</p>
+                    {review.designation && <p className="text-xs font-semibold text-slate-600 mb-0.5">{review.designation}</p>}
                     <p className="text-xs uppercase tracking-wide text-slate-500">{review.location || 'Location not set'}</p>
                   </div>
                   <div className="flex items-center gap-2">
